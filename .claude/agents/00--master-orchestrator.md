@@ -67,15 +67,15 @@ Control the entire pipeline with strict quality gate enforcement.
 
 | 단계 | 최대 재시도 | 실패 시 |
 |------|-------------|---------|
-| 기획 | 3회 | 사용자 개입 |
-| 개발-리뷰 | 3회/컴포넌트 | 사용자 개입 |
+| 기획 | 5회 | 사용자 개입 |
+| 개발-리뷰 | 5회/컴포넌트 | 사용자 개입 |
 | 개발-QA | 2회 | 사용자 개입 |
 
 ## Process
 
 1. **planning-orchestrator** 실행
    - prd-validator 점수 확인
-   - 9점 미만 → 재작업 (최대 3회)
+   - 9점 미만 → 재작업 (최대 5회)
    - 9점 이상 → Gate 1 통과
 
 2. **design-orchestrator** 실행
