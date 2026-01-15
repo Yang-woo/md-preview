@@ -14,7 +14,15 @@
       "Bash(npm install)",
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview status)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview diff --stat)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview add src/components/Settings/ .claude/tasks/dev-tasks.md src/App.tsx)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview diff --cached --name-status)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview log --oneline -5)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview add .claude/tasks/dev-tasks.md vite.config.ts index.html src/App.tsx src/components/common/ public/ package.json package-lock.json)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview add .claude/tasks/dev-tasks.md src/components/ ACCESSIBILITY.md PERFORMANCE.md)",
+      "Bash(git -C /Users/yangwoo/Documents/dev/md-preview log --oneline --all)"
     ]
   }
 }
