@@ -198,7 +198,7 @@ Zustand 스토어 설정 (editor, settings, ui)
 ---
 
 ### [DEV-010] 단축키 구현
-- **상태**: 대기
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 중간
 - **예상 공수**: 1일
@@ -209,13 +209,13 @@ Zustand 스토어 설정 (editor, settings, ui)
 키보드 단축키 지원 구현
 
 **수락 기준**:
-- [ ] useKeyboardShortcuts 훅
-- [ ] Ctrl/Cmd + B (Bold)
-- [ ] Ctrl/Cmd + I (Italic)
-- [ ] Ctrl/Cmd + K (링크)
-- [ ] Ctrl/Cmd + S (다운로드)
-- [ ] Ctrl/Cmd + Shift + P (프리뷰 토글)
-- [ ] 단축키 도움말 표시
+- [x] useKeyboardShortcuts 훅
+- [x] Ctrl/Cmd + B (Bold)
+- [x] Ctrl/Cmd + I (Italic)
+- [x] Ctrl/Cmd + K (링크)
+- [x] Ctrl/Cmd + S (다운로드)
+- [x] Ctrl/Cmd + Shift + P (프리뷰 토글)
+- [x] 단축키 도움말 표시
 
 ---
 
@@ -326,9 +326,9 @@ PWA 설정 및 오프라인 지원
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 5 |
+| 대기 | 4 |
 | 진행 중 | 0 |
-| 완료 | 10 |
+| 완료 | 11 |
 | **총계** | **15** |
 
 ## 의존성 그래프
