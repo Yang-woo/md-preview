@@ -5,7 +5,7 @@
 |------|-----|
 | ID | FEAT-001 |
 | 타입 | FEAT |
-| 상태 | **OPEN** |
+| 상태 | **RESOLVED** ✅ |
 | 생성일 | 2026-01-16 |
 | 복잡도 | 6/10 |
 
@@ -90,3 +90,10 @@
 | 일시 | 액션 | 담당 |
 |------|------|------|
 | 2026-01-16 | 이슈 생성 | bug-receiver |
+| 2026-01-16 | 코드 수정 | dev-orchestrator |
+| 2026-01-16 | 테스트 통과 | dev-orchestrator |
+| 2026-01-16 | **이슈 해결** | issue-committer |
+
+## 수정 내역
+- `src/components/Layout/Layout.tsx` 사이드바 추가
+- `src/test/setup.ts` IntersectionObserver mock 추가
