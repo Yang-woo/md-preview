@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Header } from './Header'
 import { SplitPane } from './SplitPane'
-import { Editor } from '../Editor/Editor'
+import { EditorWithToolbar } from '../Editor/EditorWithToolbar'
 import { Preview } from '../Preview/Preview'
 import { useEditorStore, useUIStore } from '../../stores'
 
@@ -83,7 +83,7 @@ export function Layout() {
             {/* Content */}
             <div className="flex-1 overflow-hidden">
               {viewMode === 'editor' && (
-                <Editor className="h-full" />
+                <EditorWithToolbar className="h-full" />
               )}
               {viewMode === 'preview' && (
                 <div className="h-full overflow-auto p-4">
@@ -95,7 +95,7 @@ export function Layout() {
         ) : (
           // Desktop: Split view
           <SplitPane
-            left={<Editor className="h-full" />}
+            left={<EditorWithToolbar className="h-full" />}
             right={
               <div className="h-full overflow-auto p-4">
                 <Preview content={content} />
