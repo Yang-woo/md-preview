@@ -1,0 +1,25 @@
+# Issue Tracking Directory
+
+이 폴더에 이슈 리포트가 저장됩니다.
+
+## 파일명 규칙
+
+```
+{TYPE}-{NNN}-{title-slug-max-50-chars}.md
+```
+
+### 예시
+- BUG-001-user-session-expires-on-refresh.md
+- FEAT-012-add-dark-mode-toggle.md
+- REFACTOR-003-cleanup-api-calls.md
+
+## 이슈 타입
+
+| Type | 설명 |
+|------|------|
+| BUG | 버그, 오류 |
+| FEAT | 기능 개선/추가 |
+| REFACTOR | 리팩토링 |
+| DOCS | 문서화 |
+| TEST | 테스트 |
+| CHORE | 기타 유지보수 |
