@@ -78,25 +78,59 @@ export function useScrollSync({ editorRef, previewRef }: ScrollSyncOptions) {
     unlockScroll()
   }, [enableScrollSync, editorRef, previewRef, getScrollPercentage, setScrollPercentage, unlockScroll])
 
-  // 이벤트 리스너 등록
+  // 이벤트 리스너 등록 (MutationObserver로 .cm-scroller 감시)
   useEffect(() => {
     const editor = editorRef.current
     const preview = previewRef.current
     if (!editor || !preview) return
 
-    // CodeMirror 스크롤 컨테이너
-    const editorScrollContainer = editor.querySelector('.cm-scroller') as HTMLElement
-    if (!editorScrollContainer) return
+    let editorScrollContainer: HTMLElement | null = null
+    let observer: MutationObserver | null = null
 
-    editorScrollContainer.addEventListener('scroll', handleEditorScroll, { passive: true })
-    preview.addEventListener('scroll', handlePreviewScroll, { passive: true })
+    // 스크롤 이벤트 리스너 등록 함수
+    const setupScrollListeners = (scroller: HTMLElement) => {
+      editorScrollContainer = scroller
+      scroller.addEventListener('scroll', handleEditorScroll, { passive: true })
+      preview.addEventListener('scroll', handlePreviewScroll, { passive: true })
+    }
 
-    return () => {
-      editorScrollContainer.removeEventListener('scroll', handleEditorScroll)
+    // 스크롤 이벤트 리스너 해제 함수
+    const cleanupScrollListeners = () => {
+      if (editorScrollContainer) {
+        editorScrollContainer.removeEventListener('scroll', handleEditorScroll)
+      }
       preview.removeEventListener('scroll', handlePreviewScroll)
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current)
       }
+    }
+
+    // .cm-scroller가 이미 있는지 확인
+    const existingScroller = editor.querySelector('.cm-scroller') as HTMLElement
+    if (existingScroller) {
+      setupScrollListeners(existingScroller)
+    } else {
+      // .cm-scroller가 나타날 때까지 MutationObserver로 감시
+      observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'childList') {
+            const scroller = editor.querySelector('.cm-scroller') as HTMLElement
+            if (scroller) {
+              setupScrollListeners(scroller)
+              observer?.disconnect()
+              observer = null
+              break
+            }
+          }
+        }
+      })
+
+      observer.observe(editor, { childList: true, subtree: true })
+    }
+
+    return () => {
+      observer?.disconnect()
+      cleanupScrollListeners()
     }
   }, [editorRef, previewRef, handleEditorScroll, handlePreviewScroll])
 

@@ -5,7 +5,7 @@
 |------|-----|
 | ID | BUG-003 |
 | 타입 | BUG |
-| 상태 | **OPEN** |
+| 상태 | **RESOLVED** ✅ |
 | 생성일 | 2026-01-16 |
 | 복잡도 | 6/10 |
 | 관련 이슈 | BUG-001 (불완전 수정) |
@@ -96,7 +96,56 @@ Editor가 마운트 완료 후 부모에게 알림
 4. 무한 루프 방지 확인
 5. 빠른 연속 스크롤 처리
 
+## 수정 내역
+
+### 적용된 방법: MutationObserver 사용
+
+```typescript
+// useScrollSync.ts - MutationObserver로 .cm-scroller 감시
+useEffect(() => {
+  const editor = editorRef.current
+  if (!editor) return
+
+  // .cm-scroller가 이미 있는지 확인
+  const existingScroller = editor.querySelector('.cm-scroller')
+  if (existingScroller) {
+    setupScrollListeners(existingScroller)
+  } else {
+    // .cm-scroller가 나타날 때까지 MutationObserver로 감시
+    observer = new MutationObserver((mutations) => {
+      const scroller = editor.querySelector('.cm-scroller')
+      if (scroller) {
+        setupScrollListeners(scroller)
+        observer?.disconnect()
+      }
+    })
+    observer.observe(editor, { childList: true, subtree: true })
+  }
+
+  return () => observer?.disconnect()
+}, [])
+```
+
+### 수정된 파일
+| 파일 | 변경 |
+|------|------|
+| `src/hooks/useScrollSync.ts` | MutationObserver로 .cm-scroller 감시 |
+| `src/hooks/__tests__/useScrollSync.test.ts` | 테스트 코드 추가 (5개 케이스) |
+| `tsconfig.app.json` | 테스트 파일 exclude 추가 |
+
+### 추가된 테스트
+| 테스트 케이스 | 설명 |
+|---------------|------|
+| delayed .cm-scroller creation | 지연된 .cm-scroller 생성 시 동기화 |
+| sync editor scroll to preview | 에디터→프리뷰 동기화 |
+| sync preview scroll to editor | 프리뷰→에디터 동기화 |
+| enableScrollSync=false | 동기화 비활성화 |
+| prevent scroll infinite loop | 무한 루프 방지 |
+
 ## 처리 이력
 | 일시 | 액션 | 담당 |
 |------|------|------|
 | 2026-01-16 | 이슈 생성 | bug-receiver |
+| 2026-01-16 | TDD 테스트 작성 | bug-fixer |
+| 2026-01-16 | MutationObserver 적용 | bug-fixer |
+| 2026-01-16 | **이슈 해결** | issue-orchestrator |
