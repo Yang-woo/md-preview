@@ -36,7 +36,7 @@ export function EditorWithToolbar({ className = '', ...editorProps }: EditorWith
   return (
     <div className={`flex flex-col h-full ${className}`}>
       <Toolbar onCommand={handleCommand} />
-      <div className="flex-1 overflow-auto" ref={editorRef}>
+      <div className="flex-1 min-h-0" ref={editorRef}>
         <Editor {...editorProps} className="h-full" />
       </div>
     </div>

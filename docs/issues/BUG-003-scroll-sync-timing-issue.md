@@ -132,6 +132,26 @@ useEffect(() => {
 | `src/hooks/useScrollSync.ts` | MutationObserver로 .cm-scroller 감시 |
 | `src/hooks/__tests__/useScrollSync.test.ts` | 테스트 코드 추가 (5개 케이스) |
 | `tsconfig.app.json` | 테스트 파일 exclude 추가 |
+| `src/components/Editor/EditorWithToolbar.tsx` | `overflow-auto` 제거, `min-h-0` 추가 |
+| `src/styles/globals.css` | CodeMirror 높이 CSS 추가 |
+
+### 추가 수정 (2차)
+
+**문제**: EditorWithToolbar의 wrapper div에 `overflow-auto`가 있어서 `.cm-scroller` 대신 이 div가 스크롤됨
+
+**해결**:
+1. `overflow-auto` 제거하고 `min-h-0` 추가
+2. CSS에서 CodeMirror가 부모 높이를 채우도록 설정
+
+```css
+/* globals.css */
+.editor-wrapper .cm-editor {
+  height: 100%;
+}
+.editor-wrapper .cm-scroller {
+  overflow: auto !important;
+}
+```
 
 ### 추가된 테스트
 | 테스트 케이스 | 설명 |
@@ -147,5 +167,6 @@ useEffect(() => {
 |------|------|------|
 | 2026-01-16 | 이슈 생성 | bug-receiver |
 | 2026-01-16 | TDD 테스트 작성 | bug-fixer |
-| 2026-01-16 | MutationObserver 적용 | bug-fixer |
+| 2026-01-16 | MutationObserver 적용 (1차) | bug-fixer |
+| 2026-01-16 | CSS 스크롤 컨테이너 수정 (2차) | bug-fixer |
 | 2026-01-16 | **이슈 해결** | issue-orchestrator |
