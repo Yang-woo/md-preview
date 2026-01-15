@@ -135,7 +135,7 @@ Header, SplitPane, 반응형 레이아웃 구현
 ---
 
 ### [DEV-007] 상태 관리 구현
-- **상태**: 대기
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 중간
 - **예상 공수**: 0.5일
@@ -146,11 +146,11 @@ Header, SplitPane, 반응형 레이아웃 구현
 Zustand 스토어 설정 (editor, settings, ui)
 
 **수락 기준**:
-- [ ] editorStore (content, fileName, isDirty)
-- [ ] settingsStore (theme, preset, fontSize)
-- [ ] uiStore (sidebarOpen, modalOpen)
-- [ ] localStorage persist 미들웨어
-- [ ] 테스트 코드 작성
+- [x] editorStore (content, fileName, isDirty)
+- [x] settingsStore (theme, preset, fontSize)
+- [x] uiStore (sidebarOpen, modalOpen)
+- [x] localStorage persist 미들웨어
+- [x] 테스트 코드 작성
 
 ---
 
@@ -326,9 +326,9 @@ PWA 설정 및 오프라인 지원
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 14 |
+| 대기 | 13 |
 | 진행 중 | 0 |
-| 완료 | 1 |
+| 완료 | 2 |
 | **총계** | **15** |
 
 ## 의존성 그래프
