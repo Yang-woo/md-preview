@@ -1,7 +1,7 @@
 ---
 name: committer
 description: TODO 완료 시 자동 커밋 에이전트. dev-tasks.md 상태 업데이트 후 커밋 가이드라인에 따라 커밋 메시지 작성 및 실행. dev-orchestrator가 TODO 완료 후 호출.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, Task
 model: sonnet
 ---
 
@@ -203,3 +203,62 @@ Task: DEV-002
 1. 파일 존재 확인
 2. 해당 TODO ID 존재 확인
 3. 수동 업데이트 후 재시도
+
+---
+
+## 워크로그 연동 (선택)
+
+커밋 완료 후 `worklog-writer` 에이전트를 호출하여 워크로그 기록 가능.
+
+### 워크로그 기록 활성화 조건
+
+다음 중 하나에 해당하면 워크로그 기록:
+1. Input에 `worklog: true` 옵션이 포함된 경우
+2. `.work-play/config.yaml`에 `worklog.auto: true` 설정된 경우
+
+### Step 6: 워크로그 기록 (선택)
+
+커밋 성공 후, Task 도구로 `worklog-writer` 호출:
+
+```yaml
+# worklog-writer에 전달할 정보
+agent: committer
+task_id: {TODO ID}
+task_title: {태스크 제목}
+status: completed
+summary: {커밋 메시지 subject}
+details:
+  files_changed: {변경된 파일 목록}
+  commit_hash: {커밋 해시}
+```
+
+### 워크로그 포함 출력 형식
+
+```markdown
+## 커밋 완료
+
+### TODO
+- ID: DEV-XXX
+- 제목: {태스크 제목}
+- 상태: 대기 → 완료 ✅
+
+### 커밋 정보
+- 해시: {short hash}
+- 타입: {type}
+- 메시지: {subject}
+
+### 변경 파일 (N개)
+| 파일 | 상태 |
+|------|------|
+| src/components/XXX.tsx | 추가 |
+
+### 워크로그
+- 기록됨 ✅
+- 파일: `.work-play/worklogs/{YYYY-MM}/{YYYY-MM-DD}.md`
+```
+
+### 워크로그 기록 실패 시
+
+- 에러 로그만 출력
+- 커밋은 이미 완료되었으므로 전체 프로세스는 성공 처리
+- 워크로그는 부가 기능이므로 실패해도 커밋 결과에 영향 없음
