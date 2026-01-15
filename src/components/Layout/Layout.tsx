@@ -8,6 +8,7 @@ import { TOCContainer } from '../TOC'
 import { useEditorStore, useUIStore } from '../../stores'
 import { useFileHandler } from '../../hooks/useFileHandler'
 import { useScrollSync } from '../../hooks/useScrollSync'
+import { useMobileScrollPosition } from '../../hooks/useMobileScrollPosition'
 
 export const Layout = memo(function Layout() {
   const { content, fileName, isDirty } = useEditorStore()
@@ -19,11 +20,15 @@ export const Layout = memo(function Layout() {
     viewMode,
     splitRatio,
     sidebarOpen,
+    editorScrollPosition,
+    previewScrollPosition,
     setViewMode,
     setSplitRatio,
     toggleSidebar,
     openSettingsModal,
     openHelpModal,
+    setEditorScrollPosition,
+    setPreviewScrollPosition,
   } = useUIStore()
 
   const [isMobile, setIsMobile] = useState(false)
@@ -59,6 +64,19 @@ export const Layout = memo(function Layout() {
     }
   }, [handleFileRead])
 
+  // 모바일 탭 전환 시 스크롤 위치 저장 및 복원
+  const { handleTabChange } = useMobileScrollPosition({
+    isMobile,
+    viewMode,
+    editorContainerRef,
+    previewContainerRef,
+    editorScrollPosition,
+    previewScrollPosition,
+    setEditorScrollPosition,
+    setPreviewScrollPosition,
+    setViewMode,
+  })
+
   return (
     <div className="h-screen flex flex-col">
       <input
@@ -84,7 +102,7 @@ export const Layout = memo(function Layout() {
             {/* Tab buttons */}
             <div className="flex border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
               <button
-                onClick={() => setViewMode('editor')}
+                onClick={() => handleTabChange('editor')}
                 className={`flex-1 py-3 text-sm font-medium transition-colors ${
                   viewMode === 'editor'
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
@@ -94,7 +112,7 @@ export const Layout = memo(function Layout() {
                 Editor
               </button>
               <button
-                onClick={() => setViewMode('preview')}
+                onClick={() => handleTabChange('preview')}
                 className={`flex-1 py-3 text-sm font-medium transition-colors ${
                   viewMode === 'preview'
                     ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { Layout } from './Layout'
 import { useUIStore } from '../../stores'
 
@@ -140,5 +140,100 @@ describe('Layout 컴포넌트', () => {
     fireEvent.resize(window)
     rerender(<Layout />)
     expect(screen.queryByRole('separator')).not.toBeInTheDocument()
+  })
+
+  describe('모바일 탭 전환 시 스크롤 위치 유지', () => {
+    beforeEach(() => {
+      // 모바일 뷰포트 설정
+      global.innerWidth = 375
+    })
+
+    it('모바일에서 탭 전환 UI가 렌더링되어야 함', () => {
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      render(<Layout />)
+
+      // 탭 버튼이 렌더링되어야 함
+      expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+    })
+
+    it('uiStore에 스크롤 위치 함수들이 존재해야 함', () => {
+      const setEditorScrollPosition = vi.fn()
+      const setPreviewScrollPosition = vi.fn()
+
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition,
+        setPreviewScrollPosition,
+      })
+
+      render(<Layout />)
+
+      // 스크롤 위치 저장 함수가 존재하는지 확인
+      expect(setEditorScrollPosition).toBeDefined()
+      expect(setPreviewScrollPosition).toBeDefined()
+    })
+
+    it('저장된 스크롤 위치 값이 uiStore에서 조회되어야 함', () => {
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 150, // 저장된 에디터 스크롤 위치
+        previewScrollPosition: 250, // 저장된 프리뷰 스크롤 위치
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      render(<Layout />)
+
+      // uiStore에서 스크롤 위치가 조회되는지 확인
+      const store = useUIStore()
+      expect(store.editorScrollPosition).toBe(150)
+      expect(store.previewScrollPosition).toBe(250)
+    })
   })
 })

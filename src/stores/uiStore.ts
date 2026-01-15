@@ -9,6 +9,8 @@ export interface UIState {
   helpModalOpen: boolean
   viewMode: ViewMode
   splitRatio: number // 0-100, percentage for editor width
+  editorScrollPosition: number
+  previewScrollPosition: number
 }
 
 export interface UIActions {
@@ -20,6 +22,8 @@ export interface UIActions {
   closeHelpModal: () => void
   setViewMode: (mode: ViewMode) => void
   setSplitRatio: (ratio: number) => void
+  setEditorScrollPosition: (position: number) => void
+  setPreviewScrollPosition: (position: number) => void
 }
 
 export type UIStore = UIState & UIActions
@@ -30,6 +34,8 @@ const initialState: UIState = {
   helpModalOpen: false,
   viewMode: 'split',
   splitRatio: 50,
+  editorScrollPosition: 0,
+  previewScrollPosition: 0,
 }
 
 export const useUIStore = create<UIStore>()(
@@ -60,6 +66,12 @@ export const useUIStore = create<UIStore>()(
 
       setSplitRatio: (splitRatio: number) =>
         set({ splitRatio: Math.max(20, Math.min(80, splitRatio)) }),
+
+      setEditorScrollPosition: (position: number) =>
+        set({ editorScrollPosition: Math.max(0, position) }),
+
+      setPreviewScrollPosition: (position: number) =>
+        set({ previewScrollPosition: Math.max(0, position) }),
     }),
     {
       name: 'md-preview-ui',

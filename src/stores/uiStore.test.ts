@@ -9,6 +9,8 @@ describe('uiStore', () => {
       helpModalOpen: false,
       viewMode: 'split',
       splitRatio: 50,
+      editorScrollPosition: 0,
+      previewScrollPosition: 0,
     })
   })
 
@@ -98,5 +100,55 @@ describe('uiStore', () => {
 
     setSplitRatio(50)
     expect(useUIStore.getState().splitRatio).toBe(50)
+  })
+
+  describe('스크롤 위치 관리', () => {
+    it('초기 스크롤 위치는 0이어야 함', () => {
+      const state = useUIStore.getState()
+
+      expect(state.editorScrollPosition).toBe(0)
+      expect(state.previewScrollPosition).toBe(0)
+    })
+
+    it('setEditorScrollPosition으로 에디터 스크롤 위치를 저장할 수 있어야 함', () => {
+      const { setEditorScrollPosition } = useUIStore.getState()
+
+      setEditorScrollPosition(150)
+      expect(useUIStore.getState().editorScrollPosition).toBe(150)
+
+      setEditorScrollPosition(300)
+      expect(useUIStore.getState().editorScrollPosition).toBe(300)
+    })
+
+    it('setPreviewScrollPosition으로 프리뷰 스크롤 위치를 저장할 수 있어야 함', () => {
+      const { setPreviewScrollPosition } = useUIStore.getState()
+
+      setPreviewScrollPosition(200)
+      expect(useUIStore.getState().previewScrollPosition).toBe(200)
+
+      setPreviewScrollPosition(450)
+      expect(useUIStore.getState().previewScrollPosition).toBe(450)
+    })
+
+    it('에디터와 프리뷰의 스크롤 위치는 독립적으로 관리되어야 함', () => {
+      const { setEditorScrollPosition, setPreviewScrollPosition } = useUIStore.getState()
+
+      setEditorScrollPosition(100)
+      setPreviewScrollPosition(250)
+
+      const state = useUIStore.getState()
+      expect(state.editorScrollPosition).toBe(100)
+      expect(state.previewScrollPosition).toBe(250)
+    })
+
+    it('음수 스크롤 위치는 0으로 보정되어야 함', () => {
+      const { setEditorScrollPosition, setPreviewScrollPosition } = useUIStore.getState()
+
+      setEditorScrollPosition(-50)
+      expect(useUIStore.getState().editorScrollPosition).toBe(0)
+
+      setPreviewScrollPosition(-100)
+      expect(useUIStore.getState().previewScrollPosition).toBe(0)
+    })
   })
 })
