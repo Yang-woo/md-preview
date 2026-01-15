@@ -12,7 +12,9 @@
       "Bash(test:*)",
       "Bash(npm create:*)",
       "Bash(npm install)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)"
     ]
   }
 }

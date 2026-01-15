@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export type ViewMode = 'split' | 'editor' | 'preview'
 
@@ -31,30 +32,42 @@ const initialState: UIState = {
   splitRatio: 50,
 }
 
-export const useUIStore = create<UIStore>((set) => ({
-  ...initialState,
+export const useUIStore = create<UIStore>()(
+  persist(
+    (set) => ({
+      ...initialState,
 
-  toggleSidebar: () =>
-    set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+      toggleSidebar: () =>
+        set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 
-  setSidebarOpen: (sidebarOpen: boolean) =>
-    set({ sidebarOpen }),
+      setSidebarOpen: (sidebarOpen: boolean) =>
+        set({ sidebarOpen }),
 
-  openSettingsModal: () =>
-    set({ settingsModalOpen: true }),
+      openSettingsModal: () =>
+        set({ settingsModalOpen: true }),
 
-  closeSettingsModal: () =>
-    set({ settingsModalOpen: false }),
+      closeSettingsModal: () =>
+        set({ settingsModalOpen: false }),
 
-  openHelpModal: () =>
-    set({ helpModalOpen: true }),
+      openHelpModal: () =>
+        set({ helpModalOpen: true }),
 
-  closeHelpModal: () =>
-    set({ helpModalOpen: false }),
+      closeHelpModal: () =>
+        set({ helpModalOpen: false }),
 
-  setViewMode: (viewMode: ViewMode) =>
-    set({ viewMode }),
+      setViewMode: (viewMode: ViewMode) =>
+        set({ viewMode }),
 
-  setSplitRatio: (splitRatio: number) =>
-    set({ splitRatio: Math.max(20, Math.min(80, splitRatio)) }),
-}))
+      setSplitRatio: (splitRatio: number) =>
+        set({ splitRatio: Math.max(20, Math.min(80, splitRatio)) }),
+    }),
+    {
+      name: 'md-preview-ui',
+      partialize: (state) => ({
+        viewMode: state.viewMode,
+        splitRatio: state.splitRatio,
+        sidebarOpen: state.sidebarOpen,
+      }),
+    }
+  )
+)
