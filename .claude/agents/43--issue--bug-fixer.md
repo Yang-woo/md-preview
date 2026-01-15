@@ -117,6 +117,55 @@ try {
 }
 ```
 
+## Regression Test Writing (TDD for Bugs)
+
+**버그 수정 전 반드시 회귀 테스트 작성**
+
+### 테스트 작성 순서 (Red-Green 방식)
+```
+1. 버그 재현 테스트 작성 (Red - 실패해야 함)
+2. 테스트 실행 → 실패 확인
+3. 코드 수정
+4. 테스트 실행 → 통과 확인 (Green)
+```
+
+### 회귀 테스트 템플릿
+```typescript
+describe('{이슈 ID}: {버그 제목}', () => {
+  it('should fix: {버그 설명}', () => {
+    // Given - 버그 발생 조건
+    const bugCondition = {...};
+
+    // When - 버그가 발생하던 동작
+    const result = targetFunction(bugCondition);
+
+    // Then - 수정 후 예상 동작
+    expect(result).toBe(expectedAfterFix);
+  });
+
+  // 엣지 케이스 테스트 추가
+  it('should handle edge case: {케이스 설명}', () => {
+    // ...
+  });
+});
+```
+
+### 테스트 파일 위치
+```bash
+# 테스트 파일 생성 위치 결정
+# 훅: src/hooks/__tests__/{훅이름}.test.ts
+# 컴포넌트: src/components/__tests__/{컴포넌트}.test.tsx
+# 유틸: src/utils/__tests__/{유틸}.test.ts
+```
+
+### 필수 테스트 케이스
+| 케이스 | 필수 여부 |
+|--------|-----------|
+| 버그 재현 (핵심) | ✅ 필수 |
+| 정상 동작 확인 | ✅ 필수 |
+| 엣지 케이스 | ⚠️ 권장 |
+| null/undefined 처리 | ⚠️ 권장 |
+
 ## Test Execution
 
 ### 테스트 실행 명령
