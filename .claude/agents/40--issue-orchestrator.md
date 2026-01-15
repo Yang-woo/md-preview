@@ -160,6 +160,7 @@ QA 업데이트 최대 재시도: 2회
 4. 이슈 리포트 생성
    - docs/issues/{TYPE}-{NNN}-{slug}.md
 5. 점수 산출 (완전성 기준)
+6. ⭐ 이슈 리포트 커밋 (docs 타입)
 ```
 
 ### Phase 2: Analysis (bug-analyzer)
@@ -278,11 +279,30 @@ ELSE:
 
 ## Process Summary
 
-1. **bug-receiver**: 이슈 접수 + 리포트 생성 (9점 이상)
+1. **bug-receiver**: 이슈 접수 + 리포트 생성 (9점 이상) → ⭐ **커밋**
 2. **bug-analyzer**: 원인 분석 + 복잡도 점수 (1-10)
 3. **수정 분기**:
    - 1-4점 → bug-fixer 직접
    - 5-10점 → dev-orchestrator 위임
 4. **qa-updater**: PRD 대조 + QA + 테스트 코드 (9점 이상)
-5. **issue-committer**: QA 통과 시 자동 커밋
+5. **issue-committer**: QA 통과 시 자동 커밋 → ⭐ **커밋**
 6. **이슈 해결 완료**
+
+## Commit Pattern
+
+**이슈별 2회 커밋 원칙**
+
+| 시점 | 커밋 타입 | 내용 |
+|------|-----------|------|
+| 이슈 리포트 생성 후 | `docs` | 이슈 리포트 파일 |
+| 이슈 수정 완료 후 | `fix`/`feat`/... | 코드 수정 + 상태 업데이트 |
+
+```bash
+# 1. 이슈 리포트 커밋
+git commit -m "docs : [BUG-001] 이슈 리포트 생성"
+
+# 2. 이슈 수정 커밋
+git commit -m "fix : [BUG-001] 스크롤 동기화 구현
+
+Resolves: BUG-001"
+```

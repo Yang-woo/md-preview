@@ -258,9 +258,28 @@ FEAT-013-add-dark-mode-toggle-to-settings.md
 | {날짜} | 이슈 생성 | bug-receiver |
 ```
 
+## Commit After Issue Creation
+
+**이슈 리포트 생성 후 즉시 커밋 필수**
+
+```bash
+# 이슈 리포트 커밋
+git add docs/issues/{TYPE}-{NNN}-{slug}.md
+git commit -m "docs : [{TYPE}-{NNN}] 이슈 리포트 생성
+
+{간략한 이슈 설명}
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+```
+
+### 커밋 시점
+1. 단일 이슈 접수 → 즉시 커밋
+2. 복수 이슈 접수 → 일괄 커밋 (묶어서)
+
 ## Important Notes
 
 - 항상 친절하고 명확한 질문
 - 기술적 용어는 쉽게 설명
 - 중복 이슈 발견 시 강제로 닫지 말고 사용자 확인
 - 긴급한 이슈(Critical)는 즉시 알림
+- **이슈 리포트 생성 후 반드시 커밋**
