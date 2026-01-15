@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import { useSettingsStore } from '../../stores'
+import { generateHeadingId } from '../../utils/headingId'
 import 'highlight.js/styles/github.css'
 import 'highlight.js/styles/github-dark.css'
 import '../../styles/presets/github.css'
@@ -35,6 +36,31 @@ export function Preview({ content, className = '' }: PreviewProps) {
             a: ({ node, ...props }) => (
               <a {...props} target="_blank" rel="noopener noreferrer" />
             ),
+            // 헤딩에 ID 추가 (TOC 연동)
+            h1: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h1 id={generateHeadingId(text)} {...props}>{children}</h1>
+            },
+            h2: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h2 id={generateHeadingId(text)} {...props}>{children}</h2>
+            },
+            h3: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h3 id={generateHeadingId(text)} {...props}>{children}</h3>
+            },
+            h4: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h4 id={generateHeadingId(text)} {...props}>{children}</h4>
+            },
+            h5: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h5 id={generateHeadingId(text)} {...props}>{children}</h5>
+            },
+            h6: ({ node, children, ...props }) => {
+              const text = String(children)
+              return <h6 id={generateHeadingId(text)} {...props}>{children}</h6>
+            },
           }}
         >
           {content}
