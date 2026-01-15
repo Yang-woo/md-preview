@@ -1,7 +1,7 @@
 import { useTheme } from './hooks/useTheme'
 import { Layout } from './components/Layout'
 import { SettingsModal } from './components/Settings'
-import { PWAInstallPrompt } from './components/common'
+import { HelpModal, PWAInstallPrompt } from './components/common'
 
 function App() {
   useTheme()
@@ -10,6 +10,7 @@ function App() {
     <>
       <Layout />
       <SettingsModal />
+      <HelpModal />
       <PWAInstallPrompt />
     </>
   )
