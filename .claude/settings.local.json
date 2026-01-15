@@ -7,7 +7,12 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs : PRD 검증 통과 및 개발 분석 완료\n\nPRD 검증 9/10점 통과 - 성공 지표, 사용자 여정, 예외 상황 처리 보완\nMVP 기능 목록, 컴포넌트 구조, 기술 스택 분석 문서 작성\n\n변경 파일:\n- PRD.md\n- .claude/prd-analysis.md\nEOF\n\\)\")",
       "Bash(git commit:*)",
       "Bash(claude:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(test:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm run build:*)"
     ]
   }
 }

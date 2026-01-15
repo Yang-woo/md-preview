@@ -8,7 +8,7 @@
 ## 태스크 목록
 
 ### [DEV-001] 프로젝트 초기화
-- **상태**: 대기
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 낮음
 - **예상 공수**: 0.5일
@@ -19,12 +19,12 @@
 Vite + React + TypeScript 프로젝트 설정 및 기본 폴더 구조 생성
 
 **수락 기준**:
-- [ ] Vite 5 + React 18 + TypeScript 설정
-- [ ] Tailwind CSS 설정
-- [ ] ESLint + Prettier 설정
-- [ ] 폴더 구조 생성 (components, hooks, stores, utils, styles)
-- [ ] 기본 의존성 설치 (zustand, react-markdown 등)
-- [ ] 개발 서버 정상 실행
+- [x] Vite 5 + React 18 + TypeScript 설정
+- [x] Tailwind CSS 설정
+- [x] ESLint + Prettier 설정
+- [x] 폴더 구조 생성 (components, hooks, stores, utils, styles)
+- [x] 기본 의존성 설치 (zustand, react-markdown 등)
+- [x] 개발 서버 정상 실행
 
 ---
 
@@ -326,9 +326,9 @@ PWA 설정 및 오프라인 지원
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 15 |
+| 대기 | 14 |
 | 진행 중 | 0 |
-| 완료 | 0 |
+| 완료 | 1 |
 | **총계** | **15** |
 
 ## 의존성 그래프
