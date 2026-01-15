@@ -51,7 +51,7 @@ CodeMirror 6 기반 마크다운 에디터 구현
 ---
 
 ### [DEV-003] 프리뷰 컴포넌트 구현
-- **상태**: 대기
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 중간
 - **예상 공수**: 1일
@@ -62,12 +62,12 @@ CodeMirror 6 기반 마크다운 에디터 구현
 react-markdown 기반 마크다운 렌더링 컴포넌트 구현
 
 **수락 기준**:
-- [ ] react-markdown + remark-gfm 통합
-- [ ] GFM 지원 (테이블, 체크박스, 취소선)
-- [ ] 코드 블록 syntax highlighting (rehype-highlight)
-- [ ] 이미지, 링크 렌더링
-- [ ] XSS 방지 처리
-- [ ] 테스트 코드 작성
+- [x] react-markdown + remark-gfm 통합
+- [x] GFM 지원 (테이블, 체크박스, 취소선)
+- [x] 코드 블록 syntax highlighting (rehype-highlight)
+- [x] 이미지, 링크 렌더링
+- [x] XSS 방지 처리 (react-markdown 기본 제공)
+- [x] 테스트 코드 작성
 
 ---
 
@@ -326,9 +326,9 @@ PWA 설정 및 오프라인 지원
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 11 |
+| 대기 | 10 |
 | 진행 중 | 0 |
-| 완료 | 4 |
+| 완료 | 5 |
 | **총계** | **15** |
 
 ## 의존성 그래프

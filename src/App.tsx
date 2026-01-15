@@ -1,6 +1,7 @@
 import { useTheme } from './hooks/useTheme'
 import { useSettingsStore, useEditorStore } from './stores'
 import { Editor } from './components/Editor'
+import { Preview } from './components/Preview'
 
 function App() {
   useTheme()
@@ -54,14 +55,23 @@ function App() {
             </div>
           </div>
 
-          <div className="border rounded-lg p-4" style={{ borderColor: 'var(--color-border)' }}>
-            <div className="mb-2 pb-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="border rounded-lg overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+            <div className="p-2 border-b" style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-bg-secondary)',
+            }}>
               <h2 className="text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>
                 프리뷰
               </h2>
             </div>
-            <div style={{ color: 'var(--color-text-secondary)' }}>
-              <pre className="text-xs">{content || '에디터에 입력하면 여기에 표시됩니다.'}</pre>
+            <div className="h-full overflow-auto p-4">
+              {content ? (
+                <Preview content={content} />
+              ) : (
+                <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                  에디터에 마크다운을 입력하면 여기에 표시됩니다.
+                </p>
+              )}
             </div>
           </div>
         </div>
