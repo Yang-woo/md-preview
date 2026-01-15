@@ -1,9 +1,11 @@
 import { useTheme } from './hooks/useTheme'
-import { useSettingsStore } from './stores'
+import { useSettingsStore, useEditorStore } from './stores'
+import { Editor } from './components/Editor'
 
 function App() {
   useTheme()
   const { theme, setTheme } = useSettingsStore()
+  const { content } = useEditorStore()
 
   const toggleTheme = () => {
     if (theme === 'light') setTheme('dark')
@@ -13,14 +15,15 @@ function App() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
-      <div className="container mx-auto p-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+      {/* Header */}
+      <div className="border-b" style={{ borderColor: 'var(--color-border)' }}>
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <h1 className="text-2xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
             Markdown Preview
           </h1>
           <button
             onClick={toggleTheme}
-            className="px-4 py-2 rounded-lg border"
+            className="px-4 py-2 rounded-lg border hover:opacity-80 transition-opacity"
             style={{
               borderColor: 'var(--color-border)',
               backgroundColor: 'var(--color-bg-secondary)',
@@ -30,13 +33,37 @@ function App() {
             테마: {theme}
           </button>
         </div>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
-          프로젝트 초기화 완료. 테마 시스템이 정상 작동합니다.
-        </p>
-        <div className="mt-4 p-4 rounded-lg" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
-          <p style={{ color: 'var(--color-text-primary)' }}>
-            테마 전환 버튼을 클릭하여 라이트/다크/시스템 테마를 확인하세요.
-          </p>
+      </div>
+
+      {/* Editor */}
+      <div className="container mx-auto p-4">
+        <div className="grid grid-cols-2 gap-4 h-[calc(100vh-120px)]">
+          <div className="border rounded-lg overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+            <div className="p-2 border-b" style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-bg-secondary)',
+            }}>
+              <h2 className="text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>
+                에디터
+              </h2>
+            </div>
+            <div className="h-full overflow-auto">
+              <Editor placeholder="# Hello World
+
+마크다운을 입력하세요..." />
+            </div>
+          </div>
+
+          <div className="border rounded-lg p-4" style={{ borderColor: 'var(--color-border)' }}>
+            <div className="mb-2 pb-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
+              <h2 className="text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>
+                프리뷰
+              </h2>
+            </div>
+            <div style={{ color: 'var(--color-text-secondary)' }}>
+              <pre className="text-xs">{content || '에디터에 입력하면 여기에 표시됩니다.'}</pre>
+            </div>
+          </div>
         </div>
       </div>
     </div>
