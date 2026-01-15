@@ -1,0 +1,176 @@
+/* VS Code Style Preset */
+.preset-vscode {
+  --preset-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --preset-bg: #1e1e1e;
+  --preset-text: #cccccc;
+  --preset-text-secondary: #858585;
+  --preset-border: #2d2d30;
+  --preset-code-bg: #1e1e1e;
+  --preset-code-border: #3e3e42;
+  --preset-link: #4fc3f7;
+  --preset-link-hover: #81d4fa;
+  --preset-heading: #e0e0e0;
+  --preset-blockquote-bg: #252526;
+  --preset-blockquote-border: #007acc;
+  --preset-table-border: #3e3e42;
+  --preset-table-header-bg: #252526;
+}
+
+.dark .preset-vscode {
+  --preset-bg: #1e1e1e;
+  --preset-text: #cccccc;
+  --preset-text-secondary: #858585;
+  --preset-border: #2d2d30;
+  --preset-code-bg: #1e1e1e;
+  --preset-code-border: #3e3e42;
+  --preset-link: #4fc3f7;
+  --preset-link-hover: #81d4fa;
+  --preset-heading: #e0e0e0;
+  --preset-blockquote-bg: #252526;
+  --preset-blockquote-border: #007acc;
+  --preset-table-border: #3e3e42;
+  --preset-table-header-bg: #252526;
+}
+
+/* Light theme for VS Code */
+.light .preset-vscode {
+  --preset-bg: #ffffff;
+  --preset-text: #3b3b3b;
+  --preset-text-secondary: #6a737d;
+  --preset-border: #e1e4e8;
+  --preset-code-bg: #f5f5f5;
+  --preset-code-border: #d4d4d4;
+  --preset-link: #0366d6;
+  --preset-link-hover: #0257b8;
+  --preset-heading: #1a1a1a;
+  --preset-blockquote-bg: #f6f8fa;
+  --preset-blockquote-border: #0366d6;
+  --preset-table-border: #d4d4d4;
+  --preset-table-header-bg: #f6f8fa;
+}
+
+.preset-vscode .preview-content {
+  font-family: var(--preset-font-family);
+  color: var(--preset-text);
+  line-height: 1.6;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--preset-bg);
+}
+
+.preset-vscode .preview-content h1,
+.preset-vscode .preview-content h2,
+.preset-vscode .preview-content h3,
+.preset-vscode .preview-content h4,
+.preset-vscode .preview-content h5,
+.preset-vscode .preview-content h6 {
+  color: var(--preset-heading);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+}
+
+.preset-vscode .preview-content h1 { font-size: 2em; }
+.preset-vscode .preview-content h2 { font-size: 1.5em; }
+.preset-vscode .preview-content h3 { font-size: 1.25em; }
+.preset-vscode .preview-content h4 { font-size: 1em; }
+.preset-vscode .preview-content h5 { font-size: 0.875em; }
+.preset-vscode .preview-content h6 { font-size: 0.85em; color: var(--preset-text-secondary); }
+
+.preset-vscode .preview-content p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.preset-vscode .preview-content a {
+  color: var(--preset-link);
+  text-decoration: none;
+}
+
+.preset-vscode .preview-content a:hover {
+  color: var(--preset-link-hover);
+  text-decoration: underline;
+}
+
+.preset-vscode .preview-content code {
+  color: #ce9178;
+  background-color: var(--preset-code-bg);
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 90%;
+  border-radius: 3px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  border: 1px solid var(--preset-code-border);
+}
+
+.preset-vscode .preview-content pre {
+  background-color: var(--preset-code-bg);
+  padding: 1em;
+  border-radius: 3px;
+  overflow-x: auto;
+  margin: 1em 0;
+  border: 1px solid var(--preset-code-border);
+}
+
+.preset-vscode .preview-content pre code {
+  color: var(--preset-text);
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.preset-vscode .preview-content blockquote {
+  margin: 0 0 1em 0;
+  padding: 0.5em 1em;
+  color: var(--preset-text-secondary);
+  border-left: 4px solid var(--preset-blockquote-border);
+  background-color: var(--preset-blockquote-bg);
+}
+
+.preset-vscode .preview-content table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  border: 1px solid var(--preset-table-border);
+}
+
+.preset-vscode .preview-content table th,
+.preset-vscode .preview-content table td {
+  padding: 8px 12px;
+  border: 1px solid var(--preset-table-border);
+}
+
+.preset-vscode .preview-content table th {
+  font-weight: 600;
+  background-color: var(--preset-table-header-bg);
+}
+
+.preset-vscode .preview-content ul,
+.preset-vscode .preview-content ol {
+  padding-left: 2em;
+  margin: 1em 0;
+}
+
+.preset-vscode .preview-content li {
+  margin: 0.25em 0;
+}
+
+.preset-vscode .preview-content hr {
+  height: 0.2em;
+  padding: 0;
+  margin: 1.5em 0;
+  background-color: var(--preset-border);
+  border: 0;
+}
+
+.preset-vscode .preview-content img {
+  max-width: 100%;
+}
+
+.preset-vscode .preview-content input[type="checkbox"] {
+  margin-right: 0.5em;
+}

@@ -1,0 +1,172 @@
+/* GitHub Style Preset */
+.preset-github {
+  --preset-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  --preset-bg: #ffffff;
+  --preset-text: #1f2328;
+  --preset-text-secondary: #656d76;
+  --preset-border: #d1d9e0;
+  --preset-code-bg: #f6f8fa;
+  --preset-code-border: #d0d7de;
+  --preset-link: #0969da;
+  --preset-link-hover: #0550ae;
+  --preset-heading: #1f2328;
+  --preset-blockquote-bg: #f6f8fa;
+  --preset-blockquote-border: #d0d7de;
+  --preset-table-border: #d1d9e0;
+  --preset-table-header-bg: #f6f8fa;
+}
+
+.dark .preset-github {
+  --preset-bg: #0d1117;
+  --preset-text: #e6edf3;
+  --preset-text-secondary: #7d8590;
+  --preset-border: #30363d;
+  --preset-code-bg: #161b22;
+  --preset-code-border: #30363d;
+  --preset-link: #4493f8;
+  --preset-link-hover: #539bf5;
+  --preset-heading: #e6edf3;
+  --preset-blockquote-bg: #161b22;
+  --preset-blockquote-border: #30363d;
+  --preset-table-border: #30363d;
+  --preset-table-header-bg: #161b22;
+}
+
+.preset-github .preview-content {
+  font-family: var(--preset-font-family);
+  color: var(--preset-text);
+  line-height: 1.6;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.preset-github .preview-content h1,
+.preset-github .preview-content h2,
+.preset-github .preview-content h3,
+.preset-github .preview-content h4,
+.preset-github .preview-content h5,
+.preset-github .preview-content h6 {
+  color: var(--preset-heading);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+}
+
+.preset-github .preview-content h1 {
+  font-size: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--preset-border);
+}
+
+.preset-github .preview-content h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--preset-border);
+}
+
+.preset-github .preview-content h3 { font-size: 1.25em; }
+.preset-github .preview-content h4 { font-size: 1em; }
+.preset-github .preview-content h5 { font-size: 0.875em; }
+.preset-github .preview-content h6 { font-size: 0.85em; color: var(--preset-text-secondary); }
+
+.preset-github .preview-content p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.preset-github .preview-content a {
+  color: var(--preset-link);
+  text-decoration: none;
+}
+
+.preset-github .preview-content a:hover {
+  color: var(--preset-link-hover);
+  text-decoration: underline;
+}
+
+.preset-github .preview-content code {
+  background-color: var(--preset-code-bg);
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 6px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Menlo, Courier, monospace;
+}
+
+.preset-github .preview-content pre {
+  background-color: var(--preset-code-bg);
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1em 0;
+  border: 1px solid var(--preset-code-border);
+}
+
+.preset-github .preview-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.preset-github .preview-content blockquote {
+  margin: 0 0 1em 0;
+  padding: 0 1em;
+  color: var(--preset-text-secondary);
+  border-left: 0.25em solid var(--preset-blockquote-border);
+  background-color: var(--preset-blockquote-bg);
+}
+
+.preset-github .preview-content table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  margin: 1em 0;
+}
+
+.preset-github .preview-content table th,
+.preset-github .preview-content table td {
+  padding: 6px 13px;
+  border: 1px solid var(--preset-table-border);
+}
+
+.preset-github .preview-content table th {
+  font-weight: 600;
+  background-color: var(--preset-table-header-bg);
+}
+
+.preset-github .preview-content table tr:nth-child(2n) {
+  background-color: var(--preset-code-bg);
+}
+
+.preset-github .preview-content ul,
+.preset-github .preview-content ol {
+  padding-left: 2em;
+  margin: 1em 0;
+}
+
+.preset-github .preview-content li {
+  margin: 0.25em 0;
+}
+
+.preset-github .preview-content hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 1.5em 0;
+  background-color: var(--preset-border);
+  border: 0;
+}
+
+.preset-github .preview-content img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: var(--preset-bg);
+}
+
+.preset-github .preview-content input[type="checkbox"] {
+  margin-right: 0.5em;
+}

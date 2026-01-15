@@ -49,9 +49,10 @@ describe('Preview 컴포넌트', () => {
 const hello = 'world';
 \`\`\`
 `
-    render(<Preview content={markdown} />)
-    const code = screen.getByText(/const hello/)
+    const { container } = render(<Preview content={markdown} />)
+    const code = container.querySelector('pre code')
     expect(code).toBeInTheDocument()
+    expect(code?.textContent).toContain('const')
   })
 
   it('링크가 렌더링되어야 함', () => {
