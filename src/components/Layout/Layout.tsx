@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Header } from './Header'
 import { SplitPane } from './SplitPane'
 import { EditorWithToolbar } from '../Editor/EditorWithToolbar'
 import { Preview } from '../Preview/Preview'
 import { useEditorStore, useUIStore } from '../../stores'
+import { useFileHandler } from '../../hooks/useFileHandler'
 
 export function Layout() {
   const { content, fileName, isDirty } = useEditorStore()
+  const { handleFileRead, handleFileDownload } = useFileHandler()
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const {
     viewMode,
     splitRatio,
@@ -32,24 +35,33 @@ export function Layout() {
     }
   }, [])
 
-  const handleDownload = () => {
-    const blob = new Blob([content], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = fileName || 'untitled.md'
-    a.click()
-    URL.revokeObjectURL(url)
+  const handleOpenFile = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      handleFileRead(file)
+    }
   }
 
   return (
     <div className="h-screen flex flex-col">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".md"
+        onChange={handleFileSelect}
+        className="hidden"
+      />
       <Header
         fileName={fileName}
         isDirty={isDirty}
+        onOpenClick={handleOpenFile}
         onSettingsClick={openSettingsModal}
         onHelpClick={openHelpModal}
-        onDownloadClick={handleDownload}
+        onDownloadClick={handleFileDownload}
       />
 
       <main className="flex-1 overflow-hidden">
