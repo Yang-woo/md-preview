@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Settings, HelpCircle, Download, FolderOpen } from 'lucide-react'
 
 export interface HeaderProps {
@@ -9,7 +10,7 @@ export interface HeaderProps {
   onDownloadClick?: () => void
 }
 
-export function Header({
+export const Header = memo(function Header({
   fileName = 'Untitled',
   isDirty = false,
   onOpenClick,
@@ -77,4 +78,4 @@ export function Header({
       </div>
     </header>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { Header } from './Header'
 import { SplitPane } from './SplitPane'
 import { EditorWithToolbar } from '../Editor/EditorWithToolbar'
@@ -6,7 +6,7 @@ import { Preview } from '../Preview/Preview'
 import { useEditorStore, useUIStore } from '../../stores'
 import { useFileHandler } from '../../hooks/useFileHandler'
 
-export function Layout() {
+export const Layout = memo(function Layout() {
   const { content, fileName, isDirty } = useEditorStore()
   const { handleFileRead, handleFileDownload } = useFileHandler()
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -35,16 +35,16 @@ export function Layout() {
     }
   }, [])
 
-  const handleOpenFile = () => {
+  const handleOpenFile = useCallback(() => {
     fileInputRef.current?.click()
-  }
+  }, [])
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
       handleFileRead(file)
     }
-  }
+  }, [handleFileRead])
 
   return (
     <div className="h-screen flex flex-col">
@@ -120,4 +120,4 @@ export function Layout() {
       </main>
     </div>
   )
-}
+})
