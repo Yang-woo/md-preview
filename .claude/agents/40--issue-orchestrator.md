@@ -44,10 +44,10 @@ Coordinate issue handling agents from reception to resolution with quality gates
        └──────┬───────┘
               │ 9점 이상
               ▼
-       ┌──────────────┐
-       │   committer  │
-       │  (자동 커밋) │
-       └──────────────┘
+       ┌────────────────┐
+       │issue-committer │
+       │  (자동 커밋)   │
+       └────────────────┘
               │
               ▼
          이슈 해결 완료 ✅
@@ -98,7 +98,7 @@ docs/issues/REFACTOR-003-cleanup-deprecated-api-calls.md
 ### Gate 4: QA Update (qa-updater)
 | 점수 | 판정 | 액션 |
 |------|------|------|
-| 9-10점 | PASS | → committer 진행 |
+| 9-10점 | PASS | → issue-committer 진행 |
 | 9점 미만 | FAIL | → QA 보완 후 재시도 |
 
 ## Complexity-Based Routing
