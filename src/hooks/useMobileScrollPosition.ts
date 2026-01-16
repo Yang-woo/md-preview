@@ -35,12 +35,12 @@ export function useMobileScrollPosition({
       // 현재 탭의 스크롤 위치 저장
       if (viewMode === 'editor') {
         const editorScroller = editorContainerRef.current?.querySelector('.cm-scroller')
-        if (editorScroller) {
+        if (editorScroller && editorScroller.scrollTop > 0) {
           setEditorScrollPosition(editorScroller.scrollTop)
         }
       } else if (viewMode === 'preview') {
         const previewScroller = previewContainerRef.current
-        if (previewScroller) {
+        if (previewScroller && previewScroller.scrollTop > 0) {
           setPreviewScrollPosition(previewScroller.scrollTop)
         }
       }

@@ -213,9 +213,8 @@ describe('useMobileScrollPosition', () => {
       expect(setEditorScrollPosition).toHaveBeenCalledWith(999999)
     })
 
-    it('음수 스크롤 값은 uiStore에서 0으로 보정되어야 함', () => {
-      // 이 테스트는 uiStore.test.ts에서 이미 검증됨
-      // 여기서는 훅이 음수 값을 그대로 전달하는지 확인
+    it('음수 스크롤 값은 저장하지 않아야 함', () => {
+      // scrollTop > 0 조건으로 인해 음수 값은 저장되지 않음
       mockEditorScroller.scrollTop = -50
       const setEditorScrollPosition = vi.fn()
       const setViewMode = vi.fn()
@@ -232,8 +231,8 @@ describe('useMobileScrollPosition', () => {
         result.current.handleTabChange('preview')
       })
 
-      expect(setEditorScrollPosition).toHaveBeenCalledWith(-50)
-      // uiStore에서 Math.max(0, -50) = 0으로 보정됨
+      // 음수 값은 저장되지 않음 (scrollTop > 0 조건으로 필터링)
+      expect(setEditorScrollPosition).not.toHaveBeenCalled()
     })
 
     it('에디터 컨테이너 ref가 undefined일 때 에러 없이 처리되어야 함', () => {

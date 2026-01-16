@@ -124,15 +124,19 @@ export const Layout = memo(function Layout() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-hidden">
-              {viewMode === 'editor' && (
+            <div className="flex-1 overflow-hidden relative">
+              <div
+                ref={editorContainerRef}
+                className={`absolute inset-0 ${viewMode === 'editor' ? 'block' : 'hidden'}`}
+              >
                 <EditorWithToolbar className="h-full" />
-              )}
-              {viewMode === 'preview' && (
-                <div className="h-full overflow-auto p-4">
-                  <Preview content={content} />
-                </div>
-              )}
+              </div>
+              <div
+                ref={previewContainerRef}
+                className={`absolute inset-0 overflow-auto p-4 ${viewMode === 'preview' ? 'block' : 'hidden'}`}
+              >
+                <Preview content={content} />
+              </div>
             </div>
           </div>
         ) : (

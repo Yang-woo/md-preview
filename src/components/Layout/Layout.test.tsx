@@ -31,6 +31,8 @@ describe('Layout 컴포넌트', () => {
       sidebarOpen: true,
       settingsModalOpen: false,
       helpModalOpen: false,
+      editorScrollPosition: 0,
+      previewScrollPosition: 0,
       setViewMode: vi.fn(),
       setSplitRatio: vi.fn(),
       toggleSidebar: vi.fn(),
@@ -39,6 +41,8 @@ describe('Layout 컴포넌트', () => {
       closeSettingsModal: vi.fn(),
       openHelpModal: vi.fn(),
       closeHelpModal: vi.fn(),
+      setEditorScrollPosition: vi.fn(),
+      setPreviewScrollPosition: vi.fn(),
     })
   })
 
@@ -78,6 +82,8 @@ describe('Layout 컴포넌트', () => {
       sidebarOpen: false,
       settingsModalOpen: false,
       helpModalOpen: false,
+      editorScrollPosition: 0,
+      previewScrollPosition: 0,
       setViewMode,
       setSplitRatio: vi.fn(),
       toggleSidebar: vi.fn(),
@@ -86,6 +92,8 @@ describe('Layout 컴포넌트', () => {
       closeSettingsModal: vi.fn(),
       openHelpModal: vi.fn(),
       closeHelpModal: vi.fn(),
+      setEditorScrollPosition: vi.fn(),
+      setPreviewScrollPosition: vi.fn(),
     })
 
     render(<Layout />)
@@ -103,6 +111,8 @@ describe('Layout 컴포넌트', () => {
       sidebarOpen: true,
       settingsModalOpen: false,
       helpModalOpen: false,
+      editorScrollPosition: 0,
+      previewScrollPosition: 0,
       setViewMode: vi.fn(),
       setSplitRatio,
       toggleSidebar: vi.fn(),
@@ -111,6 +121,8 @@ describe('Layout 컴포넌트', () => {
       closeSettingsModal: vi.fn(),
       openHelpModal: vi.fn(),
       closeHelpModal: vi.fn(),
+      setEditorScrollPosition: vi.fn(),
+      setPreviewScrollPosition: vi.fn(),
     })
 
     render(<Layout />)
@@ -234,6 +246,191 @@ describe('Layout 컴포넌트', () => {
       const store = useUIStore()
       expect(store.editorScrollPosition).toBe(150)
       expect(store.previewScrollPosition).toBe(250)
+    })
+  })
+
+  describe('BUG-004: 모바일 스크롤 위치 유지 - 회귀 테스트', () => {
+    beforeEach(() => {
+      // 모바일 뷰포트 설정
+      global.innerWidth = 375
+    })
+
+    it('should fix: 모바일에서 에디터와 프리뷰가 모두 DOM에 존재해야 함', async () => {
+      // Given - 에디터 탭에서 시작
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      const { container } = render(<Layout />)
+
+      // Wait for mobile layout to render
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+      })
+
+      // Then - 에디터와 프리뷰가 모두 DOM에 존재해야 함
+      const editorContainer = container.querySelector('.cm-scroller')
+      expect(editorContainer).toBeInTheDocument()
+
+      // Preview도 DOM에 존재해야 함 (hidden 상태로)
+      const allAbsoluteContainers = container.querySelectorAll('.absolute.inset-0')
+      expect(allAbsoluteContainers.length).toBe(2) // 에디터 + 프리뷰
+    })
+
+    it('should fix: 에디터 탭에서 에디터는 보이고 프리뷰는 hidden', async () => {
+      // Given - 에디터 모드
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      const { container } = render(<Layout />)
+
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+      })
+
+      // Then - 에디터 컨테이너는 block 클래스를 가져야 함
+      const containers = container.querySelectorAll('.absolute.inset-0')
+      const editorContainer = Array.from(containers).find(el => el.classList.contains('block'))
+      const hiddenContainer = Array.from(containers).find(el => el.classList.contains('hidden'))
+
+      expect(editorContainer).toBeInTheDocument()
+      expect(hiddenContainer).toBeInTheDocument()
+    })
+
+    it('should fix: 프리뷰 탭에서 프리뷰는 보이고 에디터는 hidden', async () => {
+      // Given - 프리뷰 모드
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'preview',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      const { container } = render(<Layout />)
+
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+      })
+
+      // Then - 프리뷰 컨테이너는 block 클래스를 가져야 함
+      const containers = container.querySelectorAll('.absolute.inset-0')
+      const visibleContainer = Array.from(containers).find(el => el.classList.contains('block'))
+      const hiddenContainer = Array.from(containers).find(el => el.classList.contains('hidden'))
+
+      expect(visibleContainer).toBeInTheDocument()
+      expect(hiddenContainer).toBeInTheDocument()
+    })
+
+    it('should fix: 에디터 컨테이너에 ref가 연결되어야 함', async () => {
+      // Given
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'editor',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      const { container } = render(<Layout />)
+
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+      })
+
+      // Then - 에디터를 포함하는 absolute wrapper가 존재해야 함
+      const editorWrapper = container.querySelector('.cm-scroller')?.closest('.absolute.inset-0')
+      expect(editorWrapper).toBeInTheDocument()
+    })
+
+    it('should fix: 프리뷰 컨테이너에 ref가 연결되어야 함', async () => {
+      // Given
+      vi.mocked(useUIStore).mockReturnValue({
+        viewMode: 'preview',
+        splitRatio: 50,
+        sidebarOpen: false,
+        settingsModalOpen: false,
+        helpModalOpen: false,
+        editorScrollPosition: 0,
+        previewScrollPosition: 0,
+        setViewMode: vi.fn(),
+        setSplitRatio: vi.fn(),
+        toggleSidebar: vi.fn(),
+        setSidebarOpen: vi.fn(),
+        openSettingsModal: vi.fn(),
+        closeSettingsModal: vi.fn(),
+        openHelpModal: vi.fn(),
+        closeHelpModal: vi.fn(),
+        setEditorScrollPosition: vi.fn(),
+        setPreviewScrollPosition: vi.fn(),
+      })
+
+      const { container } = render(<Layout />)
+
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+      })
+
+      // Then - overflow-auto를 가진 absolute wrapper가 존재해야 함 (프리뷰 컨테이너)
+      const previewWrapper = container.querySelector('.absolute.inset-0.overflow-auto')
+      expect(previewWrapper).toBeInTheDocument()
     })
   })
 })
