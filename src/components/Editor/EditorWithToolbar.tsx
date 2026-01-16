@@ -3,6 +3,8 @@ import { Editor, EditorProps, EditorRef } from './Editor'
 import { Toolbar, MarkdownCommand } from './Toolbar'
 import { applyMarkdownCommand } from '../../utils/markdownCommands'
 import { useEditorStore } from '../../stores'
+import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts'
+import { useFileHandler } from '../../hooks/useFileHandler'
 
 export interface EditorWithToolbarProps extends Omit<EditorProps, 'onChange'> {
   onChange?: (value: string) => void
@@ -11,6 +13,7 @@ export interface EditorWithToolbarProps extends Omit<EditorProps, 'onChange'> {
 export function EditorWithToolbar({ className = '', ...editorProps }: EditorWithToolbarProps) {
   const { content, setContent } = useEditorStore()
   const editorRef = useRef<EditorRef>(null)
+  const { handleFileDownload } = useFileHandler()
 
   const handleCommand = useCallback(
     (command: MarkdownCommand) => {
@@ -37,6 +40,14 @@ export function EditorWithToolbar({ className = '', ...editorProps }: EditorWith
     },
     [content, setContent]
   )
+
+  // 키보드 단축키 연결
+  useKeyboardShortcuts({
+    onBold: () => handleCommand('bold'),
+    onItalic: () => handleCommand('italic'),
+    onLink: () => handleCommand('link'),
+    onSave: handleFileDownload,
+  })
 
   return (
     <div className={`flex flex-col h-full ${className}`}>
