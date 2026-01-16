@@ -110,8 +110,11 @@ npm run dev
 # 빌드
 npm run build
 
-# 테스트
+# 테스트 (1회 실행 후 종료 - 기본)
 npm test
+
+# 테스트 (watch 모드 - 파일 변경 감지)
+npm run test:watch
 
 # 린트
 npm run lint
@@ -119,6 +122,14 @@ npm run lint
 # 프리뷰 (빌드 결과 확인)
 npm run preview
 ```
+
+### ⚠️ 테스트 실행 시 주의사항
+
+> **중요**: 테스트 실행 시 반드시 `npm test`를 사용하세요.
+> - `npm test` = `vitest --run` (1회 실행 후 종료)
+> - `npm run test:watch` = watch 모드 (파일 변경 감지, 수동 종료 필요)
+>
+> watch 모드로 실행하면 프로세스가 종료되지 않아 메모리 누수가 발생할 수 있습니다.
 
 ---
 
