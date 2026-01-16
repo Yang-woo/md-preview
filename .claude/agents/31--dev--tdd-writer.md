@@ -247,7 +247,7 @@ mod tests {
 
 ### 테스트 실행
 \`\`\`bash
-[적절한 테스트 명령어]
+npm run test:run  # watch 모드 없이 1회 실행
 \`\`\`
 
 ### 구현 가이드
