@@ -89,10 +89,10 @@ cat docs/prd.md
 ```bash
 # 커버리지 리포트 생성
 npm run test:coverage
-npm test -- --coverage
+npm run test:run -- --coverage
 
 # 특정 파일 커버리지
-npm test -- --coverage --collectCoverageFrom='{파일}'
+npm run test:run -- --coverage --collectCoverageFrom='{파일}'
 ```
 
 ### 테스트 파일 확인

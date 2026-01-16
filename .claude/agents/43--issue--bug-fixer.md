@@ -171,7 +171,7 @@ describe('{이슈 ID}: {버그 제목}', () => {
 ### 테스트 실행 명령
 ```bash
 # 프로젝트 스택 감지 후 적절한 명령 실행
-npm test              # Node.js
+npm run test:run      # Node.js (watch 모드 없이 1회 실행)
 npm run test:unit     # 단위 테스트만
 pytest               # Python
 go test ./...        # Go
@@ -179,8 +179,8 @@ go test ./...        # Go
 
 ### 특정 파일 테스트
 ```bash
-npm test -- {파일명}
-npm test -- --grep "{테스트명}"
+npm run test:run -- {파일명}
+npm run test:run -- --grep "{테스트명}"
 ```
 
 ### 테스트 결과 판단

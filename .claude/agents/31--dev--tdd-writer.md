@@ -38,8 +38,8 @@ ls package.json pyproject.toml go.mod Cargo.toml
 
 | Framework | Run Command | Assertion Style |
 |-----------|-------------|-----------------|
-| Vitest | `npm test` | expect(x).toBe(y) |
-| Jest | `npm test` | expect(x).toBe(y) |
+| Vitest | `npm run test:run` | expect(x).toBe(y) |
+| Jest | `npm run test:run` | expect(x).toBe(y) |
 | pytest | `pytest` | assert x == y |
 | Go test | `go test` | t.Errorf() |
 | Rust | `cargo test` | assert_eq!() |

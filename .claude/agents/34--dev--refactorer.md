@@ -111,7 +111,7 @@ ComponentName/
 
 ### 검증
 \`\`\`bash
-npm test -- --coverage
+npm run test:run -- --coverage
 \`\`\`
 
 ### 개선 결과
