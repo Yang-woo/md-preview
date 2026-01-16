@@ -47,7 +47,7 @@ ls package.json pyproject.toml go.mod Cargo.toml
 
 ## Test Case Categories (Universal)
 
-### Functional Tests
+### Functional Tests (단위 테스트)
 - Input/output behavior
 - State changes
 - Side effects
@@ -62,6 +62,36 @@ ls package.json pyproject.toml go.mod Cargo.toml
 - Invalid inputs
 - Network failures
 - Permission errors
+
+### ⚠️ Integration Tests (통합 테스트) - MANDATORY
+
+**반드시 통합 테스트를 포함해야 합니다!**
+
+단위 테스트만으로는 실제 사용 시나리오에서 발생하는 버그를 잡을 수 없습니다.
+
+| 체크 항목 | 설명 |
+|-----------|------|
+| **컴포넌트 연동** | 훅이 실제 컴포넌트에서 사용될 때 동작하는지 |
+| **DOM 구조** | ref가 실제 DOM에 연결되는지, 올바른 요소에 연결되는지 |
+| **타이밍** | 비동기 렌더링, 마운트 순서 등 타이밍 이슈 |
+| **실제 사용 시나리오** | 사용자가 실제로 기능을 사용하는 흐름 전체 |
+| **조건부 렌더링** | 컴포넌트가 언마운트/리마운트될 때 상태 유지 |
+
+### 통합 테스트 예시 (React)
+```typescript
+// ❌ BAD: 훅만 테스트 (모킹 과다)
+it('saves scroll position', () => {
+  const mockRef = { current: { scrollTop: 100 } };  // 가짜 ref
+  // 실제 DOM 연결 안됨!
+});
+
+// ✅ GOOD: 실제 컴포넌트에서 테스트
+it('saves scroll position in actual component', async () => {
+  render(<Layout />);  // 실제 컴포넌트 렌더
+  const editor = screen.getByTestId('editor-container');
+  // 실제 DOM에서 스크롤 위치 테스트
+});
+```
 
 ## Guidelines (Universal)
 

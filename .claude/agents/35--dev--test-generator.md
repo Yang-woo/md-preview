@@ -36,16 +36,65 @@ ls package.json pyproject.toml go.mod Cargo.toml
 ## Test Types (Universal)
 
 - **Unit**: Individual functions/methods
-- **Integration**: Component/module interactions
+- **Integration**: Component/module interactions (⚠️ MANDATORY)
 - **Snapshot**: UI/output regression prevention
+
+## ⚠️ Integration Tests - MANDATORY
+
+**모든 기능에 대해 통합 테스트를 반드시 작성해야 합니다!**
+
+### 왜 통합 테스트가 필수인가?
+
+| 버그 사례 | 원인 | 단위 테스트로 발견 | 통합 테스트로 발견 |
+|----------|------|-------------------|-------------------|
+| BUG-003 스크롤 동기화 | 타이밍 이슈 (.cm-scroller 미생성) | ❌ | ✅ |
+| BUG-004 모바일 스크롤 | ref 미연결 + 조건부 렌더링 | ❌ | ✅ |
+
+### 통합 테스트 체크리스트
+
+| 항목 | 설명 |
+|------|------|
+| **실제 컴포넌트 렌더링** | `render(<Component />)` - 모킹 최소화 |
+| **DOM 구조 검증** | ref가 올바른 요소에 연결되는지 |
+| **상태 흐름** | 사용자 액션 → 상태 변경 → UI 반영 |
+| **조건부 렌더링** | 언마운트/리마운트 시나리오 |
+| **반응형** | 모바일/데스크톱 각각 테스트 |
+
+### 통합 테스트 템플릿 (React)
+
+```typescript
+describe('Component 통합 테스트', () => {
+  // 반응형 테스트
+  describe('모바일 환경', () => {
+    beforeEach(() => {
+      // 모바일 뷰포트 설정
+      Object.defineProperty(window, 'innerWidth', { value: 375 });
+    });
+
+    it('모바일에서 탭 전환 시 스크롤 위치 유지', async () => {
+      render(<Layout />);
+      // 실제 사용자 시나리오 테스트
+    });
+  });
+
+  // DOM 구조 검증
+  it('ref가 올바른 요소에 연결됨', () => {
+    render(<Layout />);
+    const container = screen.getByTestId('editor-container');
+    expect(container).toBeInTheDocument();
+    // ref 연결 검증
+  });
+});
+```
 
 ## Guidelines (Universal)
 
 - Test from user/caller perspective, not implementation
 - Cover edge cases
 - Write meaningful assertions
-- Mock external dependencies
+- Mock external dependencies (but minimize mocking for integration tests)
 - Prefer descriptive test names
+- **ALWAYS include integration tests for features involving DOM, refs, or state**
 
 ## Stack-Specific Templates
 
