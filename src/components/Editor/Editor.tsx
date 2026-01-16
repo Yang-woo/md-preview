@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { markdown } from '@codemirror/lang-markdown'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { useEditorStore } from '../../stores'
 import { useTheme } from '../../hooks/useTheme'
+import type { TextSelection } from '../../utils/markdownCommands'
 
 export interface EditorProps {
   onChange?: (value: string) => void
@@ -13,16 +14,55 @@ export interface EditorProps {
   className?: string
 }
 
-export function Editor({
-  onChange,
-  readOnly = false,
-  placeholder = '마크다운을 입력하세요...',
-  className = '',
-}: EditorProps) {
+export interface EditorRef {
+  getSelection: () => TextSelection
+  setSelection: (from: number, to: number) => void
+  focus: () => void
+}
+
+export const Editor = forwardRef<EditorRef, EditorProps>(function Editor(
+  {
+    onChange,
+    readOnly = false,
+    placeholder = '마크다운을 입력하세요...',
+    className = '',
+  },
+  ref
+) {
   const editorRef = useRef<HTMLDivElement>(null)
   const viewRef = useRef<EditorView | null>(null)
   const { content, setContent } = useEditorStore()
   const { currentTheme } = useTheme()
+
+  // Expose imperative methods via ref
+  useImperativeHandle(ref, () => ({
+    getSelection: (): TextSelection => {
+      const view = viewRef.current
+      if (!view) {
+        return { start: 0, end: 0, selectedText: '' }
+      }
+
+      const { from, to } = view.state.selection.main
+      const selectedText = view.state.sliceDoc(from, to)
+      return { start: from, end: to, selectedText }
+    },
+    setSelection: (from: number, to: number) => {
+      const view = viewRef.current
+      if (!view) return
+
+      const docLength = view.state.doc.length
+      const safeTo = Math.min(to, docLength)
+      const safeFrom = Math.min(from, docLength)
+
+      view.dispatch({
+        selection: { anchor: safeFrom, head: safeTo },
+      })
+      view.focus()
+    },
+    focus: () => {
+      viewRef.current?.focus()
+    },
+  }))
 
   useEffect(() => {
     if (!editorRef.current) return
@@ -95,4 +135,4 @@ export function Editor({
       <div ref={editorRef} role="textbox" aria-label="Markdown Editor" />
     </div>
   )
-}
+})

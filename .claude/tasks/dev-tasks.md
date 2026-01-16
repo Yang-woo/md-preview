@@ -384,7 +384,7 @@ i18next 기반 다국어 지원 (한국어/영어)
 ## v1.1 기능 개선
 
 ### [DEV-019] 툴바 커서 위치 삽입 (Phase 1)
-- **상태**: 대기 ⏳
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 중간
 - **예상 공수**: 1일
@@ -397,17 +397,17 @@ i18next 기반 다국어 지원 (한국어/영어)
 툴바 버튼 클릭 시 현재 커서 위치에 서식 삽입 (기존: 항상 문서 끝에 추가)
 
 **수락 기준**:
-- [ ] Editor.tsx에 useImperativeHandle 추가 (FR-006)
-  - [ ] getSelection() 메서드: 커서 위치 및 선택 영역 추출
-  - [ ] setSelection(from, to) 메서드: 커서 위치 복원
-  - [ ] focus() 메서드: 에디터 포커스
-- [ ] EditorWithToolbar.tsx에 editorRef 연결
-- [ ] handleCommand에서 실제 커서 위치 가져오기 (FR-001)
-- [ ] 커서 위치 기준으로 서식 삽입 (FR-003)
-- [ ] 13종 툴바 버튼 모두 정상 작동
-- [ ] 단위 테스트 작성 (getSelection, setSelection)
-- [ ] 통합 테스트 작성 (툴바 버튼별 시나리오)
-- [ ] 테스트 커버리지 90% 이상
+- [x] Editor.tsx에 useImperativeHandle 추가 (FR-006)
+  - [x] getSelection() 메서드: 커서 위치 및 선택 영역 추출
+  - [x] setSelection(from, to) 메서드: 커서 위치 복원
+  - [x] focus() 메서드: 에디터 포커스
+- [x] EditorWithToolbar.tsx에 editorRef 연결
+- [x] handleCommand에서 실제 커서 위치 가져오기 (FR-001)
+- [x] 커서 위치 기준으로 서식 삽입 (FR-003)
+- [x] 13종 툴바 버튼 모두 정상 작동
+- [x] 단위 테스트 작성 (getSelection, setSelection)
+- [x] 통합 테스트 작성 (툴바 버튼별 시나리오)
+- [x] 테스트 커버리지 90% 이상
 
 **변경 파일**:
 - `src/components/Editor/Editor.tsx` (수정)
@@ -517,10 +517,10 @@ i18next 기반 다국어 지원 (한국어/영어)
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 4 |
+| 대기 | 3 |
 | 진행 중 | 0 |
 | 미완료 | 2 |
-| 완료 | 16 |
+| 완료 | 17 |
 | **총계** | **22** |
 
 ## 의존성 그래프
