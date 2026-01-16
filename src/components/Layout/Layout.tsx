@@ -10,7 +10,12 @@ import { useFileHandler } from '../../hooks/useFileHandler'
 import { useScrollSync } from '../../hooks/useScrollSync'
 import { useMobileScrollPosition } from '../../hooks/useMobileScrollPosition'
 
-export const Layout = memo(function Layout() {
+export interface LayoutProps {
+  isSaving?: boolean
+  lastSaved?: Date | null
+}
+
+export const Layout = memo(function Layout({ isSaving = false, lastSaved = null }: LayoutProps) {
   const { content, fileName, isDirty } = useEditorStore()
   const { handleFileRead, handleFileDownload } = useFileHandler()
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -89,6 +94,8 @@ export const Layout = memo(function Layout() {
       <Header
         fileName={fileName}
         isDirty={isDirty}
+        isSaving={isSaving}
+        lastSaved={lastSaved}
         onOpenClick={handleOpenFile}
         onSettingsClick={openSettingsModal}
         onHelpClick={openHelpModal}

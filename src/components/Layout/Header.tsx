@@ -1,9 +1,11 @@
 import { memo } from 'react'
-import { Settings, HelpCircle, Download, FolderOpen } from 'lucide-react'
+import { Settings, HelpCircle, Download, FolderOpen, Clock, Check } from 'lucide-react'
 
 export interface HeaderProps {
   fileName?: string
   isDirty?: boolean
+  isSaving?: boolean
+  lastSaved?: Date | null
   onOpenClick?: () => void
   onSettingsClick?: () => void
   onHelpClick?: () => void
@@ -13,11 +15,31 @@ export interface HeaderProps {
 export const Header = memo(function Header({
   fileName = 'Untitled',
   isDirty = false,
+  isSaving = false,
+  lastSaved = null,
   onOpenClick,
   onSettingsClick,
   onHelpClick,
   onDownloadClick,
 }: HeaderProps) {
+  // 저장 상태 텍스트 생성
+  const getSaveStatusText = () => {
+    if (isSaving) return '저장 중...'
+    if (lastSaved) {
+      const now = Date.now()
+      const diff = now - lastSaved.getTime()
+      const seconds = Math.floor(diff / 1000)
+      const minutes = Math.floor(seconds / 60)
+
+      if (seconds < 10) return '방금 저장됨'
+      if (seconds < 60) return `${seconds}초 전 저장됨`
+      if (minutes < 60) return `${minutes}분 전 저장됨`
+      return '저장됨'
+    }
+    return null
+  }
+
+  const saveStatusText = getSaveStatusText()
   return (
     <header
       role="banner"
@@ -30,15 +52,29 @@ export const Header = memo(function Header({
         </div>
       </div>
 
-      {/* File Name */}
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          {fileName}
-        </span>
-        {isDirty && (
-          <span className="text-xs text-amber-600 dark:text-amber-400">
-            (unsaved)
+      {/* File Name & Save Status */}
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            {fileName}
           </span>
+          {isDirty && (
+            <span className="text-xs text-amber-600 dark:text-amber-400">
+              (unsaved)
+            </span>
+          )}
+        </div>
+
+        {/* Save Status Indicator */}
+        {saveStatusText && (
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+            {isSaving ? (
+              <Clock size={14} className="animate-pulse" />
+            ) : (
+              <Check size={14} className="text-green-600 dark:text-green-400" />
+            )}
+            <span>{saveStatusText}</span>
+          </div>
         )}
       </div>
 
