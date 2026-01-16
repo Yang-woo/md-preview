@@ -381,15 +381,147 @@ i18next 기반 다국어 지원 (한국어/영어)
 
 ---
 
+## v1.1 기능 개선
+
+### [DEV-019] 툴바 커서 위치 삽입 (Phase 1)
+- **상태**: 대기 ⏳
+- **우선순위**: P0
+- **복잡도**: 중간
+- **예상 공수**: 1일
+- **의존성**: DEV-009
+- **담당**: tdd-writer → component-builder → code-reviewer
+- **PRD**: PRD-toolbar-improvements.md
+- **분석**: .claude/prd-analysis-toolbar.md
+
+**설명**:
+툴바 버튼 클릭 시 현재 커서 위치에 서식 삽입 (기존: 항상 문서 끝에 추가)
+
+**수락 기준**:
+- [ ] Editor.tsx에 useImperativeHandle 추가 (FR-006)
+  - [ ] getSelection() 메서드: 커서 위치 및 선택 영역 추출
+  - [ ] setSelection(from, to) 메서드: 커서 위치 복원
+  - [ ] focus() 메서드: 에디터 포커스
+- [ ] EditorWithToolbar.tsx에 editorRef 연결
+- [ ] handleCommand에서 실제 커서 위치 가져오기 (FR-001)
+- [ ] 커서 위치 기준으로 서식 삽입 (FR-003)
+- [ ] 13종 툴바 버튼 모두 정상 작동
+- [ ] 단위 테스트 작성 (getSelection, setSelection)
+- [ ] 통합 테스트 작성 (툴바 버튼별 시나리오)
+- [ ] 테스트 커버리지 90% 이상
+
+**변경 파일**:
+- `src/components/Editor/Editor.tsx` (수정)
+- `src/components/Editor/EditorWithToolbar.tsx` (수정)
+
+---
+
+### [DEV-020] 툴바 선택 영역 서식 적용 (Phase 2)
+- **상태**: 대기 ⏳
+- **우선순위**: P0
+- **복잡도**: 중간
+- **예상 공수**: 1일
+- **의존성**: DEV-019
+- **담당**: tdd-writer → component-builder → code-reviewer
+- **PRD**: PRD-toolbar-improvements.md
+
+**설명**:
+텍스트 선택(드래그) 후 툴바 버튼 클릭 시 선택된 텍스트에만 서식 적용
+
+**수락 기준**:
+- [ ] handleCommand에서 선택 영역 감지 (FR-002)
+- [ ] 선택된 텍스트에 서식 래핑 (FR-004)
+  - [ ] Bold: "text" → "**text**"
+  - [ ] Italic: "text" → "*text*"
+  - [ ] Header: "text" → "# text"
+  - [ ] Link: "text" → "[text](url)"
+  - [ ] Code: "text" → "`text`"
+- [ ] 서식 적용 후 커서 위치 복원 (FR-005)
+- [ ] 변환된 텍스트가 선택 상태로 유지
+- [ ] 단위 테스트 작성 (선택 영역 처리)
+- [ ] 통합 테스트 작성 (Bold, Italic, Code, Link 등)
+- [ ] 테스트 커버리지 90% 이상
+
+**변경 파일**:
+- `src/components/Editor/EditorWithToolbar.tsx` (수정)
+
+---
+
+### [DEV-021] 툴바 고급 기능 (Phase 3)
+- **상태**: 대기 ⏳
+- **우선순위**: P1
+- **복잡도**: 중간
+- **예상 공수**: 1일
+- **의존성**: DEV-020
+- **담당**: component-builder → code-reviewer
+- **PRD**: PRD-toolbar-improvements.md
+
+**설명**:
+멀티라인 리스트 변환, 서식 토글, 단축키 연동
+
+**수락 기준**:
+- [ ] 멀티라인 리스트 변환 (FR-007)
+  - [ ] 3줄 선택 후 Bullet List → 각 줄에 "- " 추가
+  - [ ] 3줄 선택 후 Numbered List → "1. ", "2. ", "3. " 추가
+  - [ ] 3줄 선택 후 Task List → 각 줄에 "- [ ] " 추가
+- [ ] 기존 서식 토글 (FR-008)
+  - [ ] "**bold**" 선택 후 Bold 클릭 → "bold" 변환
+  - [ ] "`code`" 선택 후 Code 클릭 → "code" 변환
+- [ ] 단축키 연동 (FR-009)
+  - [ ] Ctrl+B (Bold) 커서/선택 영역 기준 동작
+  - [ ] Ctrl+I (Italic) 커서/선택 영역 기준 동작
+  - [ ] Ctrl+K (Link) 선택 영역 기준 동작
+- [ ] 단위 테스트 작성
+- [ ] 통합 테스트 작성
+- [ ] 테스트 커버리지 90% 이상
+
+**변경 파일**:
+- `src/utils/markdownCommands.ts` (확장)
+- `src/hooks/useKeyboardShortcuts.ts` (수정)
+
+---
+
+### [DEV-022] 툴바 QA 및 최적화 (Phase 4)
+- **상태**: 대기 ⏳
+- **우선순위**: P0
+- **복잡도**: 낮음
+- **예상 공수**: 0.5일
+- **의존성**: DEV-020
+- **담당**: qa-validator → refactorer
+- **PRD**: PRD-toolbar-improvements.md
+
+**설명**:
+성능 테스트, 브라우저 호환성, 접근성 검증
+
+**수락 기준**:
+- [ ] 성능 테스트
+  - [ ] 버튼 클릭 후 50ms 이내 서식 적용
+  - [ ] 1MB 파일에서도 지연 없음
+  - [ ] 60fps 유지
+- [ ] 브라우저 호환성 테스트
+  - [ ] Chrome 정상 작동
+  - [ ] Firefox 정상 작동
+  - [ ] Safari 정상 작동
+  - [ ] Edge 정상 작동
+- [ ] 접근성 테스트
+  - [ ] 키보드로 툴바 버튼 순회 가능
+  - [ ] 포커스 인디케이터 명확
+  - [ ] aria-label 적절
+- [ ] 모바일 테스트
+  - [ ] iOS Safari 터치 이벤트 정상
+  - [ ] Android Chrome 정상 작동
+- [ ] 치명적 버그 0개
+
+---
+
 ## 진행 현황
 
 | 상태 | 개수 |
 |------|------|
-| 대기 | 0 |
+| 대기 | 4 |
 | 진행 중 | 0 |
 | 미완료 | 2 |
 | 완료 | 16 |
-| **총계** | **18** |
+| **총계** | **22** |
 
 ## 의존성 그래프
 
