@@ -6,6 +6,42 @@ export interface TextSelection {
   selectedText: string
 }
 
+/**
+ * Toggle wrapper: 이미 래핑된 텍스트는 언래핑, 아니면 래핑
+ */
+function toggleWrapper(
+  before: string,
+  after: string,
+  selectedText: string,
+  marker: string,
+  placeholder: string,
+  start: number
+): { newContent: string; newSelectionStart: number; newSelectionEnd: number } {
+  // Check if already wrapped (toggle)
+  const isWrapped = selectedText.startsWith(marker) && selectedText.endsWith(marker)
+
+  // Italic 특수 케이스: bold(**) 마커와 구별
+  const isBoldMarker = marker === '*' && selectedText.startsWith('**')
+
+  if (isWrapped && !isBoldMarker) {
+    // Unwrap: 서식 제거
+    const unwrapped = selectedText.slice(marker.length, -marker.length)
+    return {
+      newContent: `${before}${unwrapped}${after}`,
+      newSelectionStart: start,
+      newSelectionEnd: start + unwrapped.length,
+    }
+  } else {
+    // Wrap: 서식 적용
+    const text = selectedText || placeholder
+    return {
+      newContent: `${before}${marker}${text}${marker}${after}`,
+      newSelectionStart: start + marker.length,
+      newSelectionEnd: start + marker.length + text.length,
+    }
+  }
+}
+
 export function applyMarkdownCommand(
   content: string,
   selection: TextSelection,
@@ -20,23 +56,29 @@ export function applyMarkdownCommand(
   let newSelectionEnd: number
 
   switch (command) {
-    case 'bold':
-      newContent = `${before}**${selectedText || 'bold text'}**${after}`
-      newSelectionStart = start + 2
-      newSelectionEnd = newSelectionStart + (selectedText || 'bold text').length
+    case 'bold': {
+      const result = toggleWrapper(before, after, selectedText, '**', 'bold text', start)
+      newContent = result.newContent
+      newSelectionStart = result.newSelectionStart
+      newSelectionEnd = result.newSelectionEnd
       break
+    }
 
-    case 'italic':
-      newContent = `${before}*${selectedText || 'italic text'}*${after}`
-      newSelectionStart = start + 1
-      newSelectionEnd = newSelectionStart + (selectedText || 'italic text').length
+    case 'italic': {
+      const result = toggleWrapper(before, after, selectedText, '*', 'italic text', start)
+      newContent = result.newContent
+      newSelectionStart = result.newSelectionStart
+      newSelectionEnd = result.newSelectionEnd
       break
+    }
 
-    case 'strikethrough':
-      newContent = `${before}~~${selectedText || 'strikethrough text'}~~${after}`
-      newSelectionStart = start + 2
-      newSelectionEnd = newSelectionStart + (selectedText || 'strikethrough text').length
+    case 'strikethrough': {
+      const result = toggleWrapper(before, after, selectedText, '~~', 'strikethrough text', start)
+      newContent = result.newContent
+      newSelectionStart = result.newSelectionStart
+      newSelectionEnd = result.newSelectionEnd
       break
+    }
 
     case 'heading1':
       newContent = insertHeading(before, after, selectedText, 1)
@@ -68,11 +110,13 @@ export function applyMarkdownCommand(
       newSelectionEnd = newSelectionStart + (selectedText || 'alt text').length
       break
 
-    case 'inlineCode':
-      newContent = `${before}\`${selectedText || 'code'}\`${after}`
-      newSelectionStart = start + 1
-      newSelectionEnd = newSelectionStart + (selectedText || 'code').length
+    case 'inlineCode': {
+      const result = toggleWrapper(before, after, selectedText, '`', 'code', start)
+      newContent = result.newContent
+      newSelectionStart = result.newSelectionStart
+      newSelectionEnd = result.newSelectionEnd
       break
+    }
 
     case 'codeBlock':
       newContent = insertCodeBlock(before, after, selectedText)

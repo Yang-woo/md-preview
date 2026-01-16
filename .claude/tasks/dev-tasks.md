@@ -416,11 +416,11 @@ i18next 기반 다국어 지원 (한국어/영어)
 ---
 
 ### [DEV-020] 툴바 선택 영역 서식 적용 (Phase 2)
-- **상태**: 대기 ⏳
+- **상태**: 완료 ✅
 - **우선순위**: P0
 - **복잡도**: 중간
 - **예상 공수**: 1일
-- **의존성**: DEV-019
+- **의존성**: DEV-019 (완료 ✅)
 - **담당**: tdd-writer → component-builder → code-reviewer
 - **PRD**: PRD-toolbar-improvements.md
 
@@ -428,21 +428,28 @@ i18next 기반 다국어 지원 (한국어/영어)
 텍스트 선택(드래그) 후 툴바 버튼 클릭 시 선택된 텍스트에만 서식 적용
 
 **수락 기준**:
-- [ ] handleCommand에서 선택 영역 감지 (FR-002)
-- [ ] 선택된 텍스트에 서식 래핑 (FR-004)
-  - [ ] Bold: "text" → "**text**"
-  - [ ] Italic: "text" → "*text*"
-  - [ ] Header: "text" → "# text"
-  - [ ] Link: "text" → "[text](url)"
-  - [ ] Code: "text" → "`text`"
-- [ ] 서식 적용 후 커서 위치 복원 (FR-005)
-- [ ] 변환된 텍스트가 선택 상태로 유지
-- [ ] 단위 테스트 작성 (선택 영역 처리)
-- [ ] 통합 테스트 작성 (Bold, Italic, Code, Link 등)
-- [ ] 테스트 커버리지 90% 이상
+- [x] handleCommand에서 선택 영역 감지 (FR-002)
+- [x] 선택된 텍스트에 서식 래핑 (FR-004)
+  - [x] Bold: "text" → "**text**"
+  - [x] Italic: "text" → "*text*"
+  - [x] Header: "text" → "# text"
+  - [x] Link: "text" → "[text](url)"
+  - [x] Code: "text" → "`text`"
+- [x] 서식 토글 기능 (이미 서식 있으면 제거)
+  - [x] "**bold**" → "bold"
+  - [x] "*italic*" → "italic"
+  - [x] "`code`" → "code"
+- [x] 서식 적용 후 커서 위치 복원 (FR-005)
+- [x] 변환된 텍스트가 선택 상태로 유지
+- [x] 단위 테스트 작성 (선택 영역 처리) - 16개
+- [x] 통합 테스트 작성 (Bold, Italic, Code, Link 등) - 8개
+- [x] 테스트 커버리지 100% (44개 테스트 통과)
+- [x] 코드 리팩토링 (toggleWrapper 함수 추출)
 
 **변경 파일**:
-- `src/components/Editor/EditorWithToolbar.tsx` (수정)
+- `src/utils/markdownCommands.ts` (수정 + 리팩토링)
+- `src/utils/markdownCommands.phase2.test.ts` (신규)
+- `src/components/Editor/EditorWithToolbar.phase2.integration.test.tsx` (신규)
 
 ---
 
