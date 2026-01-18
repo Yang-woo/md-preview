@@ -2,6 +2,12 @@
 
 > TODO: DES-007
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| File Drop Zone (Light) | `4:41` | DES-007 File Drop Zone (600x400) |
+| File Drop Zone (Dark) | `4:104` | DES-007 File Drop Zone Dark (600x400) |
+
 ## 1. 드래그 앤 드롭 오버레이
 
 ```

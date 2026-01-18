@@ -2,6 +2,12 @@
 
 > TODO: DES-006
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| Settings Modal (Light) | `4:40` | DES-006 Settings Modal (480x500) |
+| Settings Modal (Dark) | `4:103` | DES-006 Settings Modal Dark (480x500) |
+
 ## 1. 와이어프레임
 
 ```

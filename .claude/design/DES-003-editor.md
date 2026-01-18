@@ -4,6 +4,13 @@
 > 작성일: 2026-01-15
 > 담당: ui-designer
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| Editor (Light) | `4:37` | DES-003 Editor Component (800x600) |
+| Editor (Dark) | `4:100` | DES-003 Editor Dark (800x600) |
+| Empty State | `4:116` | Empty State - Editor (800x500) |
+
 ## 1. 와이어프레임
 
 ### EditorPane 구조

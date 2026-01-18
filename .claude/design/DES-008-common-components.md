@@ -2,6 +2,23 @@
 
 > TODO: DES-008
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| Common Components (Light) | `4:42` | DES-008 Common Components (1200x800) |
+| Common Components (Dark) | `4:119` | DES-008 Common Components Dark (1200x800) |
+| Button States | `4:118` | DES-008 Button States (600x400) |
+| Button Primary | `4:59` | Primary Button |
+| Button Secondary | `4:60` | Secondary Button |
+| Button Ghost | `4:61` | Ghost Button |
+| Icon Button | `4:62` | Icon Button |
+| Input Default | `4:64` | Input Field |
+| Select Dropdown | `4:65` | Dropdown Select |
+| Tooltip | `4:67` | Tooltip |
+| Welcome Modal | `4:131` | Welcome Modal - 첫 방문자 온보딩 (480x400) |
+| Help Modal | `4:132` | Help Modal - 단축키 안내 (480x500) |
+| Recovery Prompt | `4:133` | Recovery Prompt - 자동 복구 알림 (400x200) |
+
 ## 1. Button 컴포넌트
 
 ### Variants

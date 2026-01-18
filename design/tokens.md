@@ -3,6 +3,12 @@
 > 프로젝트: Markdown Preview v1.0
 > 작성일: 2026-01-15
 
+## Figma 참조
+| 프레임 | Figma Node ID | 설명 |
+|--------|---------------|------|
+| Design Tokens - Light Mode | `4:3` | 라이트 모드 토큰 (1400x1200) |
+| Design Tokens - Dark Mode | `4:68` | 다크 모드 토큰 (1400x1200) |
+
 ## 개요
 
 Markdown Preview의 전역 디자인 토큰 정의.

@@ -3,6 +3,16 @@
 > TODO: DES-004
 > 작성일: 2026-01-15
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| Preview - GitHub | `4:38` | DES-004 Preview Component (800x600) |
+| Preview - Notion | `4:87` | DES-004 Preview - Notion Style (800x600) |
+| Preview - VS Code | `4:88` | DES-004 Preview - VS Code Style (800x600) |
+| Preview - Minimal | `4:89` | DES-004 Preview - Minimal Style (800x600) |
+| Preview (Dark) | `4:101` | DES-004 Preview Dark (800x600) |
+| Empty State | `4:117` | Empty State - Preview (800x500) |
+
 ## 1. 와이어프레임
 
 ### 프리뷰 영역 (4가지 스타일 프리셋)

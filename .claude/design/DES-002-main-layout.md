@@ -4,6 +4,14 @@
 > 작성일: 2026-01-15
 > 담당: ui-designer
 
+## Figma 참조
+| 화면 | Figma Node ID | 설명 |
+|------|---------------|------|
+| Desktop (Light) | `4:20` | DES-002 Main Layout - Desktop (1440x900) |
+| Desktop (Dark) | `4:69` | DES-002 Main Layout - Desktop Dark (1440x900) |
+| Tablet | `4:21` | DES-002 Main Layout - Tablet (768x1024) |
+| Mobile | `4:22` | DES-002 Main Layout - Mobile (375x812) |
+
 ## 1. 와이어프레임
 
 ### Desktop (≥1024px) - 3단 구조

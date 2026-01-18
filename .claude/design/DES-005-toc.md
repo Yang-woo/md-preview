@@ -2,6 +2,13 @@
 
 > TODO: DES-005
 
+## Figma 참조
+| 컴포넌트 | Figma Node ID | 설명 |
+|----------|---------------|------|
+| TOC Sidebar (Light) | `4:39` | DES-005 TOC Sidebar (250x600) |
+| TOC Sidebar (Dark) | `4:102` | DES-005 TOC Sidebar Dark (250x600) |
+| TOC Overlay (Mobile) | `4:99` | DES-005 TOC Overlay Mobile (320x600) |
+
 ## 1. 와이어프레임
 
 ```
