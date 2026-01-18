@@ -8,6 +8,8 @@ export interface TextSelection {
 
 /**
  * Toggle wrapper: 이미 래핑된 텍스트는 언래핑, 아니면 래핑
+ *
+ * 주변 컨텍스트도 확인하여 마커가 before/after에 있는 경우도 토글 지원
  */
 function toggleWrapper(
   before: string,
@@ -17,14 +19,27 @@ function toggleWrapper(
   placeholder: string,
   start: number
 ): { newContent: string; newSelectionStart: number; newSelectionEnd: number } {
-  // Check if already wrapped (toggle)
-  const isWrapped = selectedText.startsWith(marker) && selectedText.endsWith(marker)
+  // Check if already wrapped in selection text
+  const isWrappedInSelection = selectedText.startsWith(marker) && selectedText.endsWith(marker)
+
+  // Check if wrapped by surrounding context
+  const isWrappedByContext = before.endsWith(marker) && after.startsWith(marker)
 
   // Italic 특수 케이스: bold(**) 마커와 구별
   const isBoldMarker = marker === '*' && selectedText.startsWith('**')
 
-  if (isWrapped && !isBoldMarker) {
-    // Unwrap: 서식 제거
+  // 주변 컨텍스트에 마커가 있는 경우 우선 처리
+  if (isWrappedByContext && !isBoldMarker) {
+    // 주변 마커 제거
+    const newBefore = before.slice(0, -marker.length)
+    const newAfter = after.slice(marker.length)
+    return {
+      newContent: `${newBefore}${selectedText}${newAfter}`,
+      newSelectionStart: start - marker.length,
+      newSelectionEnd: start - marker.length + selectedText.length,
+    }
+  } else if (isWrappedInSelection && !isBoldMarker) {
+    // 선택 텍스트 내 마커 제거
     const unwrapped = selectedText.slice(marker.length, -marker.length)
     return {
       newContent: `${before}${unwrapped}${after}`,

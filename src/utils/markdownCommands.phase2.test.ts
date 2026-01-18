@@ -321,7 +321,7 @@ describe('markdownCommands - Phase 2: 선택 영역 서식 적용', () => {
   })
 
   describe('엣지 케이스', () => {
-    it('부분 선택 시 (서식 마커 포함하지 않음) Bold 적용', () => {
+    it('부분 선택 시 (서식 마커 포함하지 않음) Bold 토글 시 서식 제거', () => {
       // Arrange: "**world**"에서 "world"만 선택
       const content = '**world**'
       const selection: TextSelection = {
@@ -332,10 +332,85 @@ describe('markdownCommands - Phase 2: 선택 영역 서식 적용', () => {
       const command: MarkdownCommand = 'bold'
 
       // Act
-      const { newContent } = applyMarkdownCommand(content, selection, command)
+      const { newContent, newSelectionStart, newSelectionEnd } = applyMarkdownCommand(
+        content,
+        selection,
+        command
+      )
 
-      // Assert: 중첩 서식 "****world****"
-      expect(newContent).toBe('****world****')
+      // Assert: 주변 컨텍스트에 마커가 있으므로 서식 제거
+      expect(newContent).toBe('world')
+      expect(newSelectionStart).toBe(0) // 마커 제거 후 시작
+      expect(newSelectionEnd).toBe(5) // "world" 끝
+    })
+
+    it('부분 선택 시 (서식 마커 포함하지 않음) Italic 토글 시 서식 제거', () => {
+      // Arrange: "*hello*"에서 "hello"만 선택
+      const content = '*hello*'
+      const selection: TextSelection = {
+        start: 1,
+        end: 6, // "hello"만 선택 (마커 제외)
+        selectedText: 'hello',
+      }
+      const command: MarkdownCommand = 'italic'
+
+      // Act
+      const { newContent, newSelectionStart, newSelectionEnd } = applyMarkdownCommand(
+        content,
+        selection,
+        command
+      )
+
+      // Assert: 주변 컨텍스트에 마커가 있으므로 서식 제거
+      expect(newContent).toBe('hello')
+      expect(newSelectionStart).toBe(0)
+      expect(newSelectionEnd).toBe(5)
+    })
+
+    it('부분 선택 시 (서식 마커 포함하지 않음) Strikethrough 토글 시 서식 제거', () => {
+      // Arrange: "~~text~~"에서 "text"만 선택
+      const content = '~~text~~'
+      const selection: TextSelection = {
+        start: 2,
+        end: 6, // "text"만 선택 (마커 제외)
+        selectedText: 'text',
+      }
+      const command: MarkdownCommand = 'strikethrough'
+
+      // Act
+      const { newContent, newSelectionStart, newSelectionEnd } = applyMarkdownCommand(
+        content,
+        selection,
+        command
+      )
+
+      // Assert: 주변 컨텍스트에 마커가 있으므로 서식 제거
+      expect(newContent).toBe('text')
+      expect(newSelectionStart).toBe(0)
+      expect(newSelectionEnd).toBe(4)
+    })
+
+    it('부분 선택 시 (서식 마커 포함하지 않음) InlineCode 토글 시 서식 제거', () => {
+      // Arrange: "`code`"에서 "code"만 선택
+      const content = '`code`'
+      const selection: TextSelection = {
+        start: 1,
+        end: 5, // "code"만 선택 (마커 제외)
+        selectedText: 'code',
+      }
+      const command: MarkdownCommand = 'inlineCode'
+
+      // Act
+      const { newContent, newSelectionStart, newSelectionEnd } = applyMarkdownCommand(
+        content,
+        selection,
+        command
+      )
+
+      // Assert: 주변 컨텍스트에 마커가 있으므로 서식 제거
+      expect(newContent).toBe('code')
+      expect(newSelectionStart).toBe(0)
+      expect(newSelectionEnd).toBe(4)
     })
 
     it('전체 문서 선택 시 Bold 적용', () => {
