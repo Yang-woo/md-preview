@@ -2,7 +2,7 @@
 name: planning-committer
 description: 기획 단계 커밋 에이전트. PRD 작성/수정/검증 통과 후 커밋. planning-orchestrator가 각 Phase 완료 후 호출.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a planning phase commit specialist.

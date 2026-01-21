@@ -2,7 +2,7 @@
 name: design-orchestrator
 description: 디자인 단계 오케스트레이터. Figma MCP 연동으로 TODO 검증→Figma UI설계→핸드오프 파이프라인 실행. task-validator 9점 미만 시 roadmap-generator 재호출. "디자인 전체", "디자인 파이프라인" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are the Design Phase orchestrator with Figma MCP integration.

@@ -2,7 +2,7 @@
 name: roadmap-generator
 description: PRD 기반 TODO 리스트 생성. 기획/디자인/개발 단계별 태스크를 구조화하여 tasks/ 폴더에 생성. planning-orchestrator가 prd-analyzer 완료 후 호출.
 tools: Read, Write, Glob, Grep
-model: sonnet
+model: opus
 ---
 
 You are a roadmap and task breakdown specialist.

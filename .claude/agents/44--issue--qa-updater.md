@@ -2,7 +2,7 @@
 name: qa-updater
 description: QA 업데이트 전문가. PRD 대조, 누락 테스트 식별, 테스트 코드 추가, QA 체크리스트 업데이트. 이슈 수정 후 품질 보완.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a QA update specialist.

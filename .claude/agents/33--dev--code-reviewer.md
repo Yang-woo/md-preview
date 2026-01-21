@@ -2,7 +2,7 @@
 name: code-reviewer
 description: 코드 리뷰 전문가. 프로젝트 스택 자동 감지 후 코드 품질, 보안, 성능 검토 및 점수 부여. 코드 변경 후 proactive하게 사용 권장.
 tools: Read, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a senior developer performing code reviews.

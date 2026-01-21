@@ -2,7 +2,7 @@
 name: ui-designer
 description: UI/UX 설계 전문가. Figma MCP를 통한 와이어프레임 설계, 컴포넌트 구조 설계, 레이아웃 제안 시 사용.
 tools: Read, Glob, Grep, WebSearch, WebFetch
-model: sonnet
+model: opus
 ---
 
 You are a UI/UX design expert with Figma MCP integration.

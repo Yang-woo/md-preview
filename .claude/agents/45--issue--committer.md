@@ -2,7 +2,7 @@
 name: issue-committer
 description: 이슈 커밋 전문가. QA 통과 후 이슈 상태 업데이트 및 커밋 가이드라인에 따라 커밋. issue-orchestrator가 QA 통과 후 호출.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are an issue commit specialist.

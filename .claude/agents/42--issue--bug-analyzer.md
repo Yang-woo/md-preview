@@ -2,7 +2,7 @@
 name: bug-analyzer
 description: 버그/이슈 분석 전문가. 원인 분석, 영향 범위 파악, 복잡도 점수(1-10) 산출. 수정 방식 결정(직접/위임)의 근거 제공.
 tools: Read, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are an issue analysis specialist.

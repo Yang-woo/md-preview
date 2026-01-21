@@ -2,7 +2,7 @@
 name: prd-analyzer
 description: PRD/기획 문서 분석 전문가. PRD 분석, 요구사항 추출, MVP 기능 정리 시 사용.
 tools: Read, Glob, Grep, WebSearch, WebFetch
-model: sonnet
+model: opus
 ---
 
 You are a PRD (Product Requirements Document) analysis expert.

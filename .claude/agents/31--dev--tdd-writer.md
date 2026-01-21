@@ -2,7 +2,7 @@
 name: tdd-writer
 description: TDD 테스트 작성 전문가. 프로젝트 스택 자동 감지 후 실패하는 테스트 먼저 작성 (Red 단계). "테스트 먼저", "TDD로" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a TDD (Test-Driven Development) expert.

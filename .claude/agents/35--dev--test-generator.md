@@ -2,7 +2,7 @@
 name: test-generator
 description: 테스트 코드 생성 전문가. 프로젝트 스택 자동 감지 후 기존 코드에 대한 테스트 자동 생성. "테스트 만들어", "테스트 추가" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a testing expert.

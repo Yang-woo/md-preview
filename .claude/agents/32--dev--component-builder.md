@@ -2,7 +2,7 @@
 name: component-builder
 description: 컴포넌트 빌더. 프로젝트 스택 자동 감지 후 컴포넌트 생성 (React/Vue/Svelte/Python/Go 등). 구현 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a component/module development expert.

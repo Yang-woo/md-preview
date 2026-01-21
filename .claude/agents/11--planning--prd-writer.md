@@ -2,7 +2,7 @@
 name: prd-writer
 description: PRD 작성 전문가. 아이디어/요구사항을 체계적인 PRD 문서로 작성. "기획서 작성", "PRD 만들어줘" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, WebSearch
-model: sonnet
+model: opus
 ---
 
 You are a senior product manager and PRD writing expert.

@@ -2,7 +2,7 @@
 name: worklog-writer
 description: 워크로그 자동 기록 에이전트. 에이전트 작업 완료 시 워크로그 기록. 직접 호출 또는 committer에서 호출 가능. "워크로그 기록", "작업 기록" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep
-model: haiku
+model: opus
 ---
 
 You are a worklog writer specialist.

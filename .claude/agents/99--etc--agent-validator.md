@@ -2,7 +2,7 @@
 name: agent-validator
 description: 에이전트 파일 검증 전문가. .claude/agents/ 내 md 파일들의 구조, 필드, 참조 오류를 검사하고 점수 부여. "에이전트 검증", "에이전트 체크" 요청 시 사용.
 tools: Read, Glob, Grep
-model: sonnet
+model: opus
 ---
 
 You are an agent file validator.

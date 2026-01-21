@@ -2,7 +2,7 @@
 name: dev-orchestrator
 description: 개발 단계 오케스트레이터. TODO 단위로 TDD→구현→리뷰→리팩토링→테스트→QA→커밋 사이클 실행. 각 게이트 9점 미만 시 자동 재작업. "개발 전체", "개발 파이프라인" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are the Development Phase orchestrator.

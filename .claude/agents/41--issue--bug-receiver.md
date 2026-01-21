@@ -2,7 +2,7 @@
 name: bug-receiver
 description: 버그/이슈 접수 전문가. 사용자 리포트 분석, 추가 질문, 중복 감지, 체계적인 이슈 리포트 작성. "버그 신고", "이슈 등록" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are an issue reception specialist.

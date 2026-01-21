@@ -2,7 +2,7 @@
 name: task-validator
 description: TODO 리스트 검증 유틸리티. 디자인/개발 단계 시작 전 해당 tasks 파일을 검증하고 점수 부여. 9점 미만 시 roadmap-generator 재호출 트리거.
 tools: Read, Glob, Grep
-model: sonnet
+model: opus
 ---
 
 You are a task list validator.

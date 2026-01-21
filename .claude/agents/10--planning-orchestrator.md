@@ -2,7 +2,7 @@
 name: planning-orchestrator
 description: 기획 단계 오케스트레이터. PRD 작성→검증→분석→로드맵 파이프라인 실행. 검증 9점 미만 시 자동 재작업. "기획 전체", "기획 파이프라인" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are the Planning Phase orchestrator.

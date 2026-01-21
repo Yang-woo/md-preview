@@ -2,7 +2,7 @@
 name: issue-orchestrator
 description: 이슈 처리 오케스트레이터. 이슈 접수→분석→수정→QA→커밋 파이프라인 실행. 복잡도에 따라 직접 수정 또는 dev-orchestrator 위임. "이슈 처리", "버그 수정" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are the Issue Processing orchestrator.

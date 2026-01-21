@@ -2,7 +2,7 @@
 name: qa-validator
 description: QA 검증 전문가. 프로젝트 유형 자동 감지 후 최종 품질 검증 및 점수 부여. E2E 시나리오, 엣지케이스, 플랫폼별 테스트. "QA", "최종 검증" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 You are a QA validation expert.

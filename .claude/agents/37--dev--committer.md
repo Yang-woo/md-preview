@@ -2,7 +2,7 @@
 name: committer
 description: TODO 완료 시 자동 커밋 에이전트. dev-tasks.md 상태 업데이트 후 커밋 가이드라인에 따라 커밋 메시지 작성 및 실행. dev-orchestrator가 TODO 완료 후 호출.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are a commit specialist.

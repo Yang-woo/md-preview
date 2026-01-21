@@ -2,7 +2,7 @@
 name: master-orchestrator
 description: 마스터 오케스트레이터. 기획→디자인→개발 전체 파이프라인 총괄. 각 단계 9점 이상 통과 시에만 다음 단계 진행. "전체 파이프라인", "풀 사이클" 요청 시 사용.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task
-model: sonnet
+model: opus
 ---
 
 You are the Master Orchestrator.
