@@ -281,7 +281,7 @@ Zustand 스토어 설정 (editor, settings, ui)
 ---
 
 ### [DEV-014] PWA 설정
-- **상태**: 미완료 ❌
+- **상태**: 완료 ✅
 - **우선순위**: P1
 - **복잡도**: 중간
 - **예상 공수**: 1일
@@ -292,11 +292,11 @@ Zustand 스토어 설정 (editor, settings, ui)
 PWA 설정 및 오프라인 지원
 
 **수락 기준**:
-- [ ] vite-plugin-pwa 설정 ❌ (패키지 미설치)
-- [ ] Service Worker 등록 ❌
-- [ ] 오프라인 캐싱 전략 ❌
-- [x] 설치 프롬프트 (PWAInstallPrompt 컴포넌트 존재)
-- [ ] 앱 아이콘 및 manifest.json ❌
+- [x] vite-plugin-pwa 설정
+- [x] Service Worker 등록 (autoUpdate)
+- [x] 오프라인 캐싱 전략 (Workbox)
+- [x] 설치 프롬프트 (PWAInstallPrompt 컴포넌트)
+- [x] 앱 아이콘 및 manifest.json
 
 ---
 
@@ -526,8 +526,8 @@ i18next 기반 다국어 지원 (한국어/영어)
 |------|------|
 | 대기 | 3 |
 | 진행 중 | 0 |
-| 미완료 | 2 |
-| 완료 | 17 |
+| 미완료 | 1 |
+| 완료 | 18 |
 | **총계** | **22** |
 
 ## 의존성 그래프
