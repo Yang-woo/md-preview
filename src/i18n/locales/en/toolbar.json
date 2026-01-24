@@ -1,0 +1,55 @@
+{
+  "bold": {
+    "label": "Bold",
+    "tooltip": "Bold ({{shortcut}})"
+  },
+  "italic": {
+    "label": "Italic",
+    "tooltip": "Italic ({{shortcut}})"
+  },
+  "strikethrough": {
+    "label": "Strikethrough",
+    "tooltip": "Strikethrough"
+  },
+  "heading1": {
+    "label": "Heading 1",
+    "tooltip": "Heading 1"
+  },
+  "heading2": {
+    "label": "Heading 2",
+    "tooltip": "Heading 2"
+  },
+  "heading3": {
+    "label": "Heading 3",
+    "tooltip": "Heading 3"
+  },
+  "link": {
+    "label": "Insert Link",
+    "tooltip": "Link ({{shortcut}})"
+  },
+  "image": {
+    "label": "Insert Image",
+    "tooltip": "Image"
+  },
+  "inlineCode": {
+    "label": "Inline Code",
+    "tooltip": "Inline Code"
+  },
+  "codeBlock": {
+    "label": "Code Block",
+    "tooltip": "Code Block"
+  },
+  "bulletList": {
+    "label": "Bullet List",
+    "tooltip": "Bullet List"
+  },
+  "numberedList": {
+    "label": "Numbered List",
+    "tooltip": "Numbered List"
+  },
+  "taskList": {
+    "label": "Task List",
+    "tooltip": "Task List"
+  },
+  "ariaLabel": "Markdown Toolbar"
+}

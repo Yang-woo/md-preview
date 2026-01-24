@@ -1,0 +1,7 @@
+{
+  "title": "Unsaved Content Found",
+  "description": "There is unsaved content from a previous session. Would you like to restore it?",
+  "notice": "If your browser closed unexpectedly or you refreshed the page, your unsaved work can be recovered.",
+  "restore": "Restore",
+  "discard": "Discard"
+}

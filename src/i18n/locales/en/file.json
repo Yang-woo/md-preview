@@ -1,0 +1,8 @@
+{
+  "dropZone": {
+    "main": "Drag and drop a .md file here",
+    "sub": "or click below to select a file"
+  },
+  "selectFile": "Select File",
+  "fileInputLabel": "File input"
+}

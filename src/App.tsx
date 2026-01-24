@@ -1,5 +1,6 @@
 import { useTheme } from './hooks/useTheme'
 import { useAutoSave } from './hooks/useAutoSave'
+import { useLanguageSync } from './hooks/useLanguageSync'
 import { useEditorStore } from './stores/editorStore'
 import { Layout } from './components/Layout'
 import { SettingsModal } from './components/Settings'
@@ -7,6 +8,7 @@ import { HelpModal, PWAInstallPrompt, WelcomeModal, RecoveryPrompt } from './com
 
 function App() {
   useTheme()
+  useLanguageSync()
 
   const { content, setContent, markAsSaved } = useEditorStore()
 

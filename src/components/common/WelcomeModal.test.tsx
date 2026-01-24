@@ -70,7 +70,7 @@ describe('WelcomeModal', () => {
       const user = userEvent.setup()
       render(<WelcomeModal />)
 
-      const closeButton = screen.getByRole('button', { name: /Close/i })
+      const closeButton = screen.getByRole('button', { name: /닫기/i })
       await user.click(closeButton)
 
       await waitFor(() => {
@@ -134,7 +134,7 @@ describe('WelcomeModal', () => {
       const user = userEvent.setup()
       render(<WelcomeModal />)
 
-      const closeButton = screen.getByRole('button', { name: /Close/i })
+      const closeButton = screen.getByRole('button', { name: /닫기/i })
       const startButton = screen.getByRole('button', { name: /시작하기/i })
       const laterButton = screen.getByRole('button', { name: /나중에/i })
 

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts'
 
 export interface KeyboardHelpProps {
@@ -8,24 +9,25 @@ export interface KeyboardHelpProps {
  * 키보드 단축키 도움말 컴포넌트
  */
 export function KeyboardHelp({ className = '' }: KeyboardHelpProps) {
+  const { t } = useTranslation('help')
   const { shortcuts } = useKeyboardShortcuts({})
 
   const shortcutList = [
-    { label: 'Bold', shortcut: shortcuts.bold },
-    { label: 'Italic', shortcut: shortcuts.italic },
-    { label: 'Insert Link', shortcut: shortcuts.link },
-    { label: 'Save/Download', shortcut: shortcuts.save },
-    { label: 'Toggle Preview', shortcut: shortcuts.previewToggle },
+    { label: t('shortcuts.bold'), shortcut: shortcuts.bold },
+    { label: t('shortcuts.italic'), shortcut: shortcuts.italic },
+    { label: t('shortcuts.link'), shortcut: shortcuts.link },
+    { label: t('shortcuts.save'), shortcut: shortcuts.save },
+    { label: t('shortcuts.previewToggle'), shortcut: shortcuts.previewToggle },
   ]
 
   return (
     <div
       className={`keyboard-help ${className}`}
       role="complementary"
-      aria-label="키보드 단축키"
+      aria-label={t('keyboardShortcuts')}
     >
       <h3 className="text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
-        키보드 단축키
+        {t('keyboardShortcuts')}
       </h3>
       <ul className="space-y-2">
         {shortcutList.map(({ label, shortcut }) => (

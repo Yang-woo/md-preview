@@ -20,16 +20,16 @@ describe('Header 컴포넌트', () => {
 
   it('액션 버튼들을 렌더링해야 함', () => {
     render(<Header />)
-    expect(screen.getByLabelText(/Settings/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Help/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Download/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/설정/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/도움말/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/다운로드/i)).toBeInTheDocument()
   })
 
   it('설정 버튼 클릭 시 onSettingsClick 콜백을 호출해야 함', () => {
     const onSettingsClick = vi.fn()
     render(<Header onSettingsClick={onSettingsClick} />)
 
-    fireEvent.click(screen.getByLabelText(/Settings/i))
+    fireEvent.click(screen.getByLabelText(/설정/i))
     expect(onSettingsClick).toHaveBeenCalledTimes(1)
   })
 
@@ -37,7 +37,7 @@ describe('Header 컴포넌트', () => {
     const onHelpClick = vi.fn()
     render(<Header onHelpClick={onHelpClick} />)
 
-    fireEvent.click(screen.getByLabelText(/Help/i))
+    fireEvent.click(screen.getByLabelText(/도움말/i))
     expect(onHelpClick).toHaveBeenCalledTimes(1)
   })
 
@@ -45,12 +45,12 @@ describe('Header 컴포넌트', () => {
     const onDownloadClick = vi.fn()
     render(<Header onDownloadClick={onDownloadClick} />)
 
-    fireEvent.click(screen.getByLabelText(/Download/i))
+    fireEvent.click(screen.getByLabelText(/다운로드/i))
     expect(onDownloadClick).toHaveBeenCalledTimes(1)
   })
 
   it('isDirty가 true일 때 저장 안됨 표시를 해야 함', () => {
     render(<Header isDirty={true} />)
-    expect(screen.getByText(/unsaved/i)).toBeInTheDocument()
+    expect(screen.getByText(/저장되지 않음/i)).toBeInTheDocument()
   })
 })

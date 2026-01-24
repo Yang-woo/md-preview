@@ -58,10 +58,10 @@ describe('SettingsModal', () => {
     useUIStore.setState({ settingsModalOpen: true })
     render(<SettingsModal />)
 
-    expect(screen.getByLabelText(/Small 폰트 크기/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Medium 폰트 크기/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Large 폰트 크기/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/XL 폰트 크기/i)).toBeInTheDocument()
+    expect(screen.getByLabelText('Small')).toBeInTheDocument()
+    expect(screen.getByLabelText('Medium')).toBeInTheDocument()
+    expect(screen.getByLabelText('Large')).toBeInTheDocument()
+    expect(screen.getByLabelText('XL')).toBeInTheDocument()
   })
 
   it('에디터 옵션 체크박스가 표시됨', () => {

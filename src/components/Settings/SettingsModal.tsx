@@ -1,9 +1,11 @@
 import { X } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useUIStore } from '../../stores/uiStore'
 
 export function SettingsModal() {
+  const { t } = useTranslation(['settings', 'common'])
   const isOpen = useUIStore((state) => state.settingsModalOpen)
   const closeModal = useUIStore((state) => state.closeSettingsModal)
 
@@ -13,11 +15,13 @@ export function SettingsModal() {
     fontSize,
     enableScrollSync,
     enableAutoSave,
+    language,
     setTheme,
     setStylePreset,
     setFontSize,
     toggleScrollSync,
     toggleAutoSave,
+    setLanguage,
     reset,
   } = useSettingsStore()
 
@@ -43,16 +47,16 @@ export function SettingsModal() {
                   id="settings-title"
                   className="text-xl font-semibold text-gray-900 dark:text-white"
                 >
-                  설정
+                  {t('settings:title')}
                 </Dialog.Title>
                 <Dialog.Description className="sr-only">
-                  테마, 스타일 프리셋, 폰트 크기 및 에디터 설정을 변경할 수 있습니다.
+                  {t('settings:description')}
                 </Dialog.Description>
               </div>
               <Dialog.Close asChild>
                 <button
                   type="button"
-                  aria-label="닫기"
+                  aria-label={t('common:close')}
                   className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <X size={20} />
@@ -65,7 +69,7 @@ export function SettingsModal() {
               {/* Theme Selection */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  테마
+                  {t('settings:theme')}
                 </label>
                 <div className="flex gap-4">
                   <label className="flex items-center cursor-pointer">
@@ -74,11 +78,11 @@ export function SettingsModal() {
                       name="theme"
                       value="light"
                       checked={theme === 'light'}
-                      onChange={(e) => setTheme(e.target.value as any)}
+                      onChange={(e) => setTheme(e.target.value as 'light' | 'dark' | 'system')}
                       className="mr-2"
-                      aria-label="라이트 테마"
+                      aria-label={t('settings:themeLight')}
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">라이트</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:themeLight')}</span>
                   </label>
                   <label className="flex items-center cursor-pointer">
                     <input
@@ -86,11 +90,11 @@ export function SettingsModal() {
                       name="theme"
                       value="dark"
                       checked={theme === 'dark'}
-                      onChange={(e) => setTheme(e.target.value as any)}
+                      onChange={(e) => setTheme(e.target.value as 'light' | 'dark' | 'system')}
                       className="mr-2"
-                      aria-label="다크 테마"
+                      aria-label={t('settings:themeDark')}
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">다크</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:themeDark')}</span>
                   </label>
                   <label className="flex items-center cursor-pointer">
                     <input
@@ -98,11 +102,11 @@ export function SettingsModal() {
                       name="theme"
                       value="system"
                       checked={theme === 'system'}
-                      onChange={(e) => setTheme(e.target.value as any)}
+                      onChange={(e) => setTheme(e.target.value as 'light' | 'dark' | 'system')}
                       className="mr-2"
-                      aria-label="시스템 테마"
+                      aria-label={t('settings:themeSystem')}
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">시스템</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:themeSystem')}</span>
                   </label>
                 </div>
               </div>
@@ -113,26 +117,26 @@ export function SettingsModal() {
                   htmlFor="style-preset"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
-                  스타일 프리셋
+                  {t('settings:stylePreset')}
                 </label>
                 <select
                   id="style-preset"
                   value={stylePreset}
-                  onChange={(e) => setStylePreset(e.target.value as any)}
+                  onChange={(e) => setStylePreset(e.target.value as 'github' | 'notion' | 'vscode' | 'minimal')}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  aria-label="스타일 프리셋 선택"
+                  aria-label={t('settings:stylePresetLabel')}
                 >
                   <option value="github">GitHub</option>
                   <option value="notion">Notion</option>
                   <option value="vscode">VS Code</option>
-                  <option value="minimal">미니멀</option>
+                  <option value="minimal">{t('settings:styleMinimal')}</option>
                 </select>
               </div>
 
               {/* Font Size Selection */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  폰트 크기
+                  {t('settings:fontSize')}
                 </label>
                 <div className="flex gap-4">
                   <label className="flex items-center cursor-pointer">
@@ -141,9 +145,9 @@ export function SettingsModal() {
                       name="fontSize"
                       value="small"
                       checked={fontSize === 'small'}
-                      onChange={(e) => setFontSize(e.target.value as any)}
+                      onChange={(e) => setFontSize(e.target.value as 'small' | 'medium' | 'large' | 'xl')}
                       className="mr-2"
-                      aria-label="Small 폰트 크기"
+                      aria-label="Small"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">Small</span>
                   </label>
@@ -153,9 +157,9 @@ export function SettingsModal() {
                       name="fontSize"
                       value="medium"
                       checked={fontSize === 'medium'}
-                      onChange={(e) => setFontSize(e.target.value as any)}
+                      onChange={(e) => setFontSize(e.target.value as 'small' | 'medium' | 'large' | 'xl')}
                       className="mr-2"
-                      aria-label="Medium 폰트 크기"
+                      aria-label="Medium"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">Medium</span>
                   </label>
@@ -165,9 +169,9 @@ export function SettingsModal() {
                       name="fontSize"
                       value="large"
                       checked={fontSize === 'large'}
-                      onChange={(e) => setFontSize(e.target.value as any)}
+                      onChange={(e) => setFontSize(e.target.value as 'small' | 'medium' | 'large' | 'xl')}
                       className="mr-2"
-                      aria-label="Large 폰트 크기"
+                      aria-label="Large"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">Large</span>
                   </label>
@@ -177,11 +181,44 @@ export function SettingsModal() {
                       name="fontSize"
                       value="xl"
                       checked={fontSize === 'xl'}
-                      onChange={(e) => setFontSize(e.target.value as any)}
+                      onChange={(e) => setFontSize(e.target.value as 'small' | 'medium' | 'large' | 'xl')}
                       className="mr-2"
-                      aria-label="XL 폰트 크기"
+                      aria-label="XL"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">XL</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Language Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  {t('settings:language')}
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="language"
+                      value="ko"
+                      checked={language === 'ko'}
+                      onChange={(e) => setLanguage(e.target.value as 'ko' | 'en')}
+                      className="mr-2"
+                      aria-label={t('settings:languageKo')}
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:languageKo')}</span>
+                  </label>
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="language"
+                      value="en"
+                      checked={language === 'en'}
+                      onChange={(e) => setLanguage(e.target.value as 'ko' | 'en')}
+                      className="mr-2"
+                      aria-label={t('settings:languageEn')}
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:languageEn')}</span>
                   </label>
                 </div>
               </div>
@@ -189,7 +226,7 @@ export function SettingsModal() {
               {/* Editor Options */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  에디터 설정
+                  {t('settings:editorSettings')}
                 </label>
                 <div className="space-y-2">
                   <label className="flex items-center cursor-pointer">
@@ -198,10 +235,10 @@ export function SettingsModal() {
                       checked={enableScrollSync}
                       onChange={toggleScrollSync}
                       className="mr-2"
-                      aria-label="스크롤 동기화 활성화"
+                      aria-label={t('settings:scrollSync')}
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">
-                      스크롤 동기화
+                      {t('settings:scrollSync')}
                     </span>
                   </label>
                   <label className="flex items-center cursor-pointer">
@@ -210,9 +247,9 @@ export function SettingsModal() {
                       checked={enableAutoSave}
                       onChange={toggleAutoSave}
                       className="mr-2"
-                      aria-label="자동 저장 활성화"
+                      aria-label={t('settings:autoSave')}
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">자동 저장</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('settings:autoSave')}</span>
                   </label>
                 </div>
               </div>
@@ -224,17 +261,17 @@ export function SettingsModal() {
                 type="button"
                 onClick={handleReset}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="초기화"
+                aria-label={t('common:reset')}
               >
-                초기화
+                {t('common:reset')}
               </button>
               <Dialog.Close asChild>
                 <button
                   type="button"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  aria-label="닫기"
+                  aria-label={t('common:close')}
                 >
-                  닫기
+                  {t('common:close')}
                 </button>
               </Dialog.Close>
             </div>

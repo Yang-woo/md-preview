@@ -1,0 +1,40 @@
+{
+  "title": "Welcome!",
+  "subtitle": "Welcome to Markdown Preview",
+  "feature": {
+    "preview": {
+      "title": "Live Preview",
+      "description": "See the result instantly as you write markdown"
+    },
+    "styles": {
+      "title": "Various Styles",
+      "description": "4 style presets including GitHub, Notion, VS Code"
+    },
+    "autoSave": {
+      "title": "Auto Save",
+      "description": "Your work is automatically saved every 30 seconds"
+    },
+    "shortcuts": {
+      "title": "Keyboard Shortcuts",
+      "description": "Various shortcuts like Ctrl/Cmd + B, I, K"
+    }
+  },
+  "moreFeatures": {
+    "title": "More Features",
+    "dragDrop": "File drag and drop",
+    "toc": "Auto-generated TOC",
+    "theme": "Light/Dark theme",
+    "highlight": "Code block syntax highlighting",
+    "gfm": "GFM (GitHub Flavored Markdown) support"
+  },
+  "cta": {
+    "title": "Get Started",
+    "description": "Start with sample markdown or begin writing right away.",
+    "start": "Get Started (Load Sample)",
+    "later": "Later"
+  },
+  "tips": {
+    "shortcut": "Click the button to see all keyboard shortcuts",
+    "settings": "Change theme and style in the settings button at top right"
+  }
+}

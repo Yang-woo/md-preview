@@ -1,0 +1,12 @@
+{
+  "saving": "저장 중...",
+  "justSaved": "방금 저장됨",
+  "savedSecondsAgo": "{{seconds}}초 전 저장됨",
+  "savedMinutesAgo": "{{minutes}}분 전 저장됨",
+  "saved": "저장됨",
+  "unsaved": "(저장되지 않음)",
+  "close": "닫기",
+  "cancel": "취소",
+  "confirm": "확인",
+  "reset": "초기화"
+}

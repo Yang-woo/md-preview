@@ -152,10 +152,10 @@ describe('PWAInstallPrompt - Integration Tests', () => {
     // 모든 버튼 확인
     expect(screen.getByRole('button', { name: /설치/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /나중에/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Close/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /닫기/i })).toBeInTheDocument()
 
     // 모든 버튼이 클릭 가능
-    const closeButton = screen.getByRole('button', { name: /Close/i })
+    const closeButton = screen.getByRole('button', { name: /닫기/i })
     await user.click(closeButton)
 
     await waitFor(() => {

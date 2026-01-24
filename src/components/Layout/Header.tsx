@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Settings, HelpCircle, Download, FolderOpen, Clock, Check } from 'lucide-react'
 
 export interface HeaderProps {
@@ -22,19 +23,21 @@ export const Header = memo(function Header({
   onHelpClick,
   onDownloadClick,
 }: HeaderProps) {
+  const { t } = useTranslation(['common', 'header'])
+
   // 저장 상태 텍스트 생성
   const getSaveStatusText = () => {
-    if (isSaving) return '저장 중...'
+    if (isSaving) return t('common:saving')
     if (lastSaved) {
       const now = Date.now()
       const diff = now - lastSaved.getTime()
       const seconds = Math.floor(diff / 1000)
       const minutes = Math.floor(seconds / 60)
 
-      if (seconds < 10) return '방금 저장됨'
-      if (seconds < 60) return `${seconds}초 전 저장됨`
-      if (minutes < 60) return `${minutes}분 전 저장됨`
-      return '저장됨'
+      if (seconds < 10) return t('common:justSaved')
+      if (seconds < 60) return t('common:savedSecondsAgo', { seconds })
+      if (minutes < 60) return t('common:savedMinutesAgo', { minutes })
+      return t('common:saved')
     }
     return null
   }
@@ -60,7 +63,7 @@ export const Header = memo(function Header({
           </span>
           {isDirty && (
             <span className="text-xs text-amber-600 dark:text-amber-400">
-              (unsaved)
+              {t('common:unsaved')}
             </span>
           )}
         </div>
@@ -82,7 +85,7 @@ export const Header = memo(function Header({
       <div className="flex items-center gap-2">
         <button
           onClick={onOpenClick}
-          aria-label="Open File"
+          aria-label={t('header:openFile')}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors"
         >
           <FolderOpen size={20} />
@@ -90,7 +93,7 @@ export const Header = memo(function Header({
 
         <button
           onClick={onDownloadClick}
-          aria-label="Download"
+          aria-label={t('header:download')}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors"
         >
           <Download size={20} />
@@ -98,7 +101,7 @@ export const Header = memo(function Header({
 
         <button
           onClick={onHelpClick}
-          aria-label="Help"
+          aria-label={t('header:help')}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors"
         >
           <HelpCircle size={20} />
@@ -106,7 +109,7 @@ export const Header = memo(function Header({
 
         <button
           onClick={onSettingsClick}
-          aria-label="Settings"
+          aria-label={t('header:settings')}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors"
         >
           <Settings size={20} />

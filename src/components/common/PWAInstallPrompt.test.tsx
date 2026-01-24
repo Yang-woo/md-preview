@@ -111,7 +111,7 @@ describe('PWAInstallPrompt', () => {
       expect(screen.getByText(/앱으로 설치하기/i)).toBeInTheDocument()
     })
 
-    const closeButton = screen.getByRole('button', { name: /Close/i })
+    const closeButton = screen.getByRole('button', { name: /닫기/i })
     await user.click(closeButton)
 
     await waitFor(() => {

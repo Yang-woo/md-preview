@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Bold,
   Italic,
@@ -37,44 +39,69 @@ export interface ToolbarProps {
 interface ToolbarButton {
   command: MarkdownCommand
   icon: React.ReactNode
-  label: string
-  tooltip: string
+  labelKey: string
+  tooltipKey: string
+  hasShortcut?: boolean
 }
 
-const toolbarButtons: ToolbarButton[] = [
-  { command: 'bold', icon: <Bold size={18} />, label: 'Bold', tooltip: 'Bold (Ctrl+B)' },
-  { command: 'italic', icon: <Italic size={18} />, label: 'Italic', tooltip: 'Italic (Ctrl+I)' },
-  { command: 'strikethrough', icon: <Strikethrough size={18} />, label: 'Strikethrough', tooltip: 'Strikethrough' },
-  { command: 'heading1', icon: <Heading1 size={18} />, label: 'Heading 1', tooltip: 'Heading 1' },
-  { command: 'heading2', icon: <Heading2 size={18} />, label: 'Heading 2', tooltip: 'Heading 2' },
-  { command: 'heading3', icon: <Heading3 size={18} />, label: 'Heading 3', tooltip: 'Heading 3' },
-  { command: 'link', icon: <Link size={18} />, label: 'Insert Link', tooltip: 'Link (Ctrl+K)' },
-  { command: 'image', icon: <Image size={18} />, label: 'Insert Image', tooltip: 'Image' },
-  { command: 'inlineCode', icon: <Code size={18} />, label: 'Inline Code', tooltip: 'Inline Code' },
-  { command: 'codeBlock', icon: <FileCode size={18} />, label: 'Code Block', tooltip: 'Code Block' },
-  { command: 'bulletList', icon: <List size={18} />, label: 'Bullet List', tooltip: 'Bullet List' },
-  { command: 'numberedList', icon: <ListOrdered size={18} />, label: 'Numbered List', tooltip: 'Numbered List' },
-  { command: 'taskList', icon: <CheckSquare size={18} />, label: 'Task List', tooltip: 'Task List' },
+const toolbarButtonConfigs: ToolbarButton[] = [
+  { command: 'bold', icon: <Bold size={18} />, labelKey: 'bold.label', tooltipKey: 'bold.tooltip', hasShortcut: true },
+  { command: 'italic', icon: <Italic size={18} />, labelKey: 'italic.label', tooltipKey: 'italic.tooltip', hasShortcut: true },
+  { command: 'strikethrough', icon: <Strikethrough size={18} />, labelKey: 'strikethrough.label', tooltipKey: 'strikethrough.tooltip' },
+  { command: 'heading1', icon: <Heading1 size={18} />, labelKey: 'heading1.label', tooltipKey: 'heading1.tooltip' },
+  { command: 'heading2', icon: <Heading2 size={18} />, labelKey: 'heading2.label', tooltipKey: 'heading2.tooltip' },
+  { command: 'heading3', icon: <Heading3 size={18} />, labelKey: 'heading3.label', tooltipKey: 'heading3.tooltip' },
+  { command: 'link', icon: <Link size={18} />, labelKey: 'link.label', tooltipKey: 'link.tooltip', hasShortcut: true },
+  { command: 'image', icon: <Image size={18} />, labelKey: 'image.label', tooltipKey: 'image.tooltip' },
+  { command: 'inlineCode', icon: <Code size={18} />, labelKey: 'inlineCode.label', tooltipKey: 'inlineCode.tooltip' },
+  { command: 'codeBlock', icon: <FileCode size={18} />, labelKey: 'codeBlock.label', tooltipKey: 'codeBlock.tooltip' },
+  { command: 'bulletList', icon: <List size={18} />, labelKey: 'bulletList.label', tooltipKey: 'bulletList.tooltip' },
+  { command: 'numberedList', icon: <ListOrdered size={18} />, labelKey: 'numberedList.label', tooltipKey: 'numberedList.tooltip' },
+  { command: 'taskList', icon: <CheckSquare size={18} />, labelKey: 'taskList.label', tooltipKey: 'taskList.tooltip' },
 ]
 
 export function Toolbar({ onCommand, className = '' }: ToolbarProps) {
+  const { t } = useTranslation('toolbar')
+
+  const isMac = useMemo(() =>
+    typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.userAgent),
+    []
+  )
+  const modKey = isMac ? 'Cmd' : 'Ctrl'
+
+  const getShortcut = (command: MarkdownCommand): string | undefined => {
+    switch (command) {
+      case 'bold': return `${modKey}+B`
+      case 'italic': return `${modKey}+I`
+      case 'link': return `${modKey}+K`
+      default: return undefined
+    }
+  }
+
   return (
     <div
       className={`flex items-center gap-1 p-2 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 ${className}`}
       role="toolbar"
-      aria-label="Markdown Toolbar"
+      aria-label={t('ariaLabel')}
     >
-      {toolbarButtons.map((button) => (
-        <button
-          key={button.command}
-          onClick={() => onCommand(button.command)}
-          aria-label={button.label}
-          title={button.tooltip}
-          className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
-        >
-          {button.icon}
-        </button>
-      ))}
+      {toolbarButtonConfigs.map((button) => {
+        const shortcut = getShortcut(button.command)
+        const tooltip = button.hasShortcut && shortcut
+          ? t(button.tooltipKey, { shortcut })
+          : t(button.tooltipKey)
+
+        return (
+          <button
+            key={button.command}
+            onClick={() => onCommand(button.command)}
+            aria-label={t(button.labelKey)}
+            title={tooltip}
+            className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+          >
+            {button.icon}
+          </button>
+        )
+      })}
     </div>
   )
 }

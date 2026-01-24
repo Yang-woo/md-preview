@@ -1,0 +1,12 @@
+{
+  "title": "도움말",
+  "description": "키보드 단축키 및 사용법 안내",
+  "keyboardShortcuts": "키보드 단축키",
+  "shortcuts": {
+    "bold": "Bold",
+    "italic": "Italic",
+    "link": "링크 삽입",
+    "save": "저장/다운로드",
+    "previewToggle": "미리보기 전환"
+  }
+}

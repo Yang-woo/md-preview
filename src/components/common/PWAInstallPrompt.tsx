@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Download, X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -7,6 +8,7 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export function PWAInstallPrompt() {
+  const { t } = useTranslation(['pwa', 'common'])
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [showPrompt, setShowPrompt] = useState(false)
 
@@ -70,33 +72,33 @@ export function PWAInstallPrompt() {
             id="pwa-install-title"
             className="text-sm font-semibold text-gray-900 dark:text-white mb-1"
           >
-            앱으로 설치하기
+            {t('pwa:title')}
           </h3>
           <p
             id="pwa-install-description"
             className="text-xs text-gray-600 dark:text-gray-400 mb-3"
           >
-            Markdown Preview를 앱으로 설치하여 오프라인에서도 사용하세요.
+            {t('pwa:description')}
           </p>
           <div className="flex gap-2">
             <button
               onClick={handleInstall}
               className="flex-1 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              설치
+              {t('pwa:install')}
             </button>
             <button
               onClick={handleDismiss}
               className="px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500"
             >
-              나중에
+              {t('pwa:later')}
             </button>
           </div>
         </div>
         <button
           onClick={handleDismiss}
           className="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-          aria-label="Close"
+          aria-label={t('common:close')}
         >
           <X size={16} />
         </button>

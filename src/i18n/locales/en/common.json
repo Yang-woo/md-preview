@@ -1,0 +1,12 @@
+{
+  "saving": "Saving...",
+  "justSaved": "Just saved",
+  "savedSecondsAgo": "Saved {{seconds}}s ago",
+  "savedMinutesAgo": "Saved {{minutes}}m ago",
+  "saved": "Saved",
+  "unsaved": "(unsaved)",
+  "close": "Close",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "reset": "Reset"
+}

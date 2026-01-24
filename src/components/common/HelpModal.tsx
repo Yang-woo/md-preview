@@ -1,9 +1,11 @@
 import { X } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../stores/uiStore'
 import { KeyboardHelp } from './KeyboardHelp'
 
 export function HelpModal() {
+  const { t } = useTranslation(['help', 'common'])
   const isOpen = useUIStore((state) => state.helpModalOpen)
   const closeModal = useUIStore((state) => state.closeHelpModal)
 
@@ -25,16 +27,16 @@ export function HelpModal() {
                   id="help-title"
                   className="text-xl font-semibold text-gray-900 dark:text-white"
                 >
-                  도움말
+                  {t('help:title')}
                 </Dialog.Title>
                 <Dialog.Description className="sr-only">
-                  키보드 단축키 및 사용법 안내
+                  {t('help:description')}
                 </Dialog.Description>
               </div>
               <Dialog.Close asChild>
                 <button
                   type="button"
-                  aria-label="닫기"
+                  aria-label={t('common:close')}
                   className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <X size={20} />
@@ -51,9 +53,9 @@ export function HelpModal() {
                 <button
                   type="button"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  aria-label="닫기"
+                  aria-label={t('common:close')}
                 >
-                  닫기
+                  {t('common:close')}
                 </button>
               </Dialog.Close>
             </div>

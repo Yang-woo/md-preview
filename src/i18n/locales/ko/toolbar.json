@@ -1,0 +1,55 @@
+{
+  "bold": {
+    "label": "굵게",
+    "tooltip": "굵게 ({{shortcut}})"
+  },
+  "italic": {
+    "label": "기울임",
+    "tooltip": "기울임 ({{shortcut}})"
+  },
+  "strikethrough": {
+    "label": "취소선",
+    "tooltip": "취소선"
+  },
+  "heading1": {
+    "label": "제목 1",
+    "tooltip": "제목 1"
+  },
+  "heading2": {
+    "label": "제목 2",
+    "tooltip": "제목 2"
+  },
+  "heading3": {
+    "label": "제목 3",
+    "tooltip": "제목 3"
+  },
+  "link": {
+    "label": "링크 삽입",
+    "tooltip": "링크 ({{shortcut}})"
+  },
+  "image": {
+    "label": "이미지 삽입",
+    "tooltip": "이미지"
+  },
+  "inlineCode": {
+    "label": "인라인 코드",
+    "tooltip": "인라인 코드"
+  },
+  "codeBlock": {
+    "label": "코드 블록",
+    "tooltip": "코드 블록"
+  },
+  "bulletList": {
+    "label": "글머리 기호 목록",
+    "tooltip": "글머리 기호 목록"
+  },
+  "numberedList": {
+    "label": "번호 매기기 목록",
+    "tooltip": "번호 매기기 목록"
+  },
+  "taskList": {
+    "label": "작업 목록",
+    "tooltip": "작업 목록"
+  },
+  "ariaLabel": "마크다운 툴바"
+}

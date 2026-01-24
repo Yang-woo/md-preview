@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { PanelLeftClose, PanelLeft } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Header } from './Header'
 import { SplitPane } from './SplitPane'
 import { EditorWithToolbar } from '../Editor/EditorWithToolbar'
@@ -16,6 +17,7 @@ export interface LayoutProps {
 }
 
 export const Layout = memo(function Layout({ isSaving = false, lastSaved = null }: LayoutProps) {
+  const { t } = useTranslation('layout')
   const { content, fileName, isDirty } = useEditorStore()
   const { handleFileRead, handleFileDownload } = useFileHandler()
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -116,7 +118,7 @@ export const Layout = memo(function Layout({ isSaving = false, lastSaved = null 
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
-                Editor
+                {t('editor')}
               </button>
               <button
                 onClick={() => handleTabChange('preview')}
@@ -126,7 +128,7 @@ export const Layout = memo(function Layout({ isSaving = false, lastSaved = null 
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
-                Preview
+                {t('preview')}
               </button>
             </div>
 
@@ -159,7 +161,7 @@ export const Layout = memo(function Layout({ isSaving = false, lastSaved = null 
               <button
                 onClick={toggleSidebar}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-700"
-                aria-label={sidebarOpen ? '사이드바 닫기' : '사이드바 열기'}
+                aria-label={sidebarOpen ? t('sidebarClose') : t('sidebarOpen')}
               >
                 {sidebarOpen ? <PanelLeftClose size={20} /> : <PanelLeft size={20} />}
               </button>

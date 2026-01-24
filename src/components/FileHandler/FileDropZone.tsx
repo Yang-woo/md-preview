@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Upload } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export interface FileDropZoneProps {
   onFileDrop: (file: File) => void
@@ -7,6 +8,7 @@ export interface FileDropZoneProps {
 }
 
 export function FileDropZone({ onFileDrop, className = '' }: FileDropZoneProps) {
+  const { t } = useTranslation('file')
   const [isDragging, setIsDragging] = useState(false)
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -52,10 +54,10 @@ export function FileDropZone({ onFileDrop, className = '' }: FileDropZoneProps) 
         }`}
       />
       <p className="text-sm text-gray-600 dark:text-gray-400">
-        Drag and drop a <span className="font-mono font-semibold">.md</span> file here
+        {t('dropZone.main')}
       </p>
       <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-        or click below to select a file
+        {t('dropZone.sub')}
       </p>
     </div>
   )

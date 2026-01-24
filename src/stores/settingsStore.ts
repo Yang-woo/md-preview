@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 export type Theme = 'light' | 'dark' | 'system'
 export type StylePreset = 'github' | 'notion' | 'vscode' | 'minimal'
 export type FontSize = 'small' | 'medium' | 'large' | 'xl'
+export type Language = 'ko' | 'en'
 
 export interface SettingsState {
   theme: Theme
@@ -13,6 +14,7 @@ export interface SettingsState {
   enableScrollSync: boolean
   enableAutoSave: boolean
   autoSaveInterval: number // seconds
+  language: Language
 }
 
 export interface SettingsActions {
@@ -23,6 +25,7 @@ export interface SettingsActions {
   toggleScrollSync: () => void
   toggleAutoSave: () => void
   setAutoSaveInterval: (interval: number) => void
+  setLanguage: (language: Language) => void
   reset: () => void
 }
 
@@ -36,6 +39,7 @@ const initialState: SettingsState = {
   enableScrollSync: true,
   enableAutoSave: true,
   autoSaveInterval: 30,
+  language: 'ko',
 }
 
 export const useSettingsStore = create<SettingsStore>()(
@@ -63,6 +67,9 @@ export const useSettingsStore = create<SettingsStore>()(
 
       setAutoSaveInterval: (autoSaveInterval: number) =>
         set({ autoSaveInterval }),
+
+      setLanguage: (language: Language) =>
+        set({ language }),
 
       reset: () =>
         set(initialState),

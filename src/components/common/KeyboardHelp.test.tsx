@@ -9,9 +9,9 @@ describe('KeyboardHelp', () => {
     expect(screen.getByText('키보드 단축키')).toBeInTheDocument()
     expect(screen.getByText('Bold')).toBeInTheDocument()
     expect(screen.getByText('Italic')).toBeInTheDocument()
-    expect(screen.getByText('Insert Link')).toBeInTheDocument()
-    expect(screen.getByText('Save/Download')).toBeInTheDocument()
-    expect(screen.getByText('Toggle Preview')).toBeInTheDocument()
+    expect(screen.getByText('링크 삽입')).toBeInTheDocument()
+    expect(screen.getByText('저장/다운로드')).toBeInTheDocument()
+    expect(screen.getByText('미리보기 전환')).toBeInTheDocument()
   })
 
   it('단축키를 kbd 요소로 표시해야 함', () => {

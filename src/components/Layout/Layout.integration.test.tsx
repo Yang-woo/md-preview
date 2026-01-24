@@ -60,7 +60,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     const { container } = render(<Layout />)
 
     // 1. 에디터 탭 확인
-    expect(screen.getByRole('button', { name: /Editor/i })).toHaveClass('text-blue-600')
+    expect(screen.getByRole('button', { name: /에디터/i })).toHaveClass('text-blue-600')
 
     // 2. 에디터에서 스크롤 (시뮬레이션)
     const editorScroller = container.querySelector('.cm-scroller')
@@ -72,7 +72,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     }
 
     // 3. 프리뷰 탭으로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
@@ -82,7 +82,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     expect(useUIStore.getState().editorScrollPosition).toBeGreaterThanOrEqual(0)
 
     // 5. 다시 에디터 탭으로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Editor/i }))
+    fireEvent.click(screen.getByRole('button', { name: /에디터/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('editor')
@@ -96,7 +96,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     const { container } = render(<Layout />)
 
     // 1. 프리뷰 탭으로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
@@ -112,7 +112,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     }
 
     // 3. 에디터 탭으로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Editor/i }))
+    fireEvent.click(screen.getByRole('button', { name: /에디터/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('editor')
@@ -122,7 +122,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     expect(useUIStore.getState().previewScrollPosition).toBeGreaterThanOrEqual(0)
 
     // 5. 다시 프리뷰 탭으로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
@@ -137,7 +137,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
 
     // 1. 에디터에서 스크롤 -> 프리뷰로 전환
     useUIStore.getState().setEditorScrollPosition(100)
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
@@ -145,7 +145,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
 
     // 2. 프리뷰에서 스크롤 -> 에디터로 전환
     useUIStore.getState().setPreviewScrollPosition(200)
-    fireEvent.click(screen.getByRole('button', { name: /Editor/i }))
+    fireEvent.click(screen.getByRole('button', { name: /에디터/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('editor')
@@ -156,7 +156,7 @@ Accusantium doloremque laudantium, totam rem aperiam.
     expect(useUIStore.getState().previewScrollPosition).toBe(200)
 
     // 4. 프리뷰로 다시 전환
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
@@ -177,8 +177,8 @@ Accusantium doloremque laudantium, totam rem aperiam.
     rerender(<Layout />)
 
     // 데스크톱에서는 SplitPane이 렌더링됨 (탭 버튼 없음)
-    expect(screen.queryByRole('button', { name: /Editor/i })).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /Preview/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /에디터/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /미리보기/i })).not.toBeInTheDocument()
 
     // SplitPane이 렌더링되어야 함
     expect(screen.getByRole('separator')).toBeInTheDocument()
@@ -212,14 +212,14 @@ Accusantium doloremque laudantium, totam rem aperiam.
     useEditorStore.getState().setContent('# 새로운 콘텐츠')
 
     // 3. 프리뷰로 전환
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('preview')
     })
 
     // 4. 에디터로 다시 전환
-    fireEvent.click(screen.getByRole('button', { name: /Editor/i }))
+    fireEvent.click(screen.getByRole('button', { name: /에디터/i }))
 
     await waitFor(() => {
       expect(useUIStore.getState().viewMode).toBe('editor')

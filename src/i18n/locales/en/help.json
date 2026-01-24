@@ -1,0 +1,12 @@
+{
+  "title": "Help",
+  "description": "Keyboard shortcuts and usage guide",
+  "keyboardShortcuts": "Keyboard Shortcuts",
+  "shortcuts": {
+    "bold": "Bold",
+    "italic": "Italic",
+    "link": "Insert Link",
+    "save": "Save/Download",
+    "previewToggle": "Toggle Preview"
+  }
+}

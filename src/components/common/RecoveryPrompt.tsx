@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { AlertCircle, X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export interface RecoveryPromptProps {
   isOpen: boolean
@@ -8,6 +9,8 @@ export interface RecoveryPromptProps {
 }
 
 export function RecoveryPrompt({ isOpen, onRestore, onDiscard }: RecoveryPromptProps) {
+  const { t } = useTranslation(['recovery', 'common'])
+
   // Escape 키로 모달 닫기
   useEffect(() => {
     if (!isOpen) return
@@ -61,19 +64,19 @@ export function RecoveryPrompt({ isOpen, onRestore, onDiscard }: RecoveryPromptP
               id="recovery-prompt-title"
               className="text-lg font-semibold text-gray-900 dark:text-white"
             >
-              저장되지 않은 내용 발견
+              {t('recovery:title')}
             </h2>
             <p
               id="recovery-prompt-description"
               className="mt-1 text-sm text-gray-600 dark:text-gray-400"
             >
-              이전 세션의 저장되지 않은 내용이 있습니다. 복구하시겠습니까?
+              {t('recovery:description')}
             </p>
           </div>
           <button
             onClick={onDiscard}
             className="rounded-lg p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-400 transition-colors"
-            aria-label="Close"
+            aria-label={t('common:close')}
           >
             <X className="h-5 w-5" />
           </button>
@@ -83,8 +86,7 @@ export function RecoveryPrompt({ isOpen, onRestore, onDiscard }: RecoveryPromptP
         <div className="p-6 space-y-4">
           <div className="rounded-lg bg-amber-50 dark:bg-amber-900/20 p-4 border border-amber-200 dark:border-amber-800">
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              <strong>알림:</strong> 브라우저가 갑자기 종료되었거나 페이지를 새로고침한 경우,
-              저장되지 않은 작업 내용이 복구될 수 있습니다.
+              <strong>{t('common:confirm')}:</strong> {t('recovery:notice')}
             </p>
           </div>
 
@@ -94,13 +96,13 @@ export function RecoveryPrompt({ isOpen, onRestore, onDiscard }: RecoveryPromptP
               onClick={onRestore}
               className="flex-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              복구하기
+              {t('recovery:restore')}
             </button>
             <button
               onClick={onDiscard}
               className="flex-1 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2.5 font-medium border border-gray-300 dark:border-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
-              삭제하기
+              {t('recovery:discard')}
             </button>
           </div>
         </div>

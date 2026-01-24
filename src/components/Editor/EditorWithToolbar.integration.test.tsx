@@ -28,10 +28,10 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       render(<EditorWithToolbar />)
 
       // Assert
-      const toolbar = screen.getByRole('toolbar', { name: /markdown toolbar/i })
+      const toolbar = screen.getByRole('toolbar', { name: /마크다운 툴바/i })
       expect(toolbar).toBeInTheDocument()
 
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       expect(boldButton).toBeInTheDocument()
     })
   })
@@ -46,7 +46,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       // CodeMirror 초기 로딩 시 커서는 0번째 위치에 있음
 
       // Act: Bold 버튼 클릭
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: "**bold text**Hello" (시작에 삽입)
@@ -62,7 +62,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       render(<EditorWithToolbar />)
 
       // Act
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert
@@ -77,7 +77,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       render(<EditorWithToolbar />)
 
       // Act: Bold 버튼 클릭 (현재 커서 위치에 삽입)
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: getSelection()이 호출되었고, 그 위치에 삽입됨
@@ -90,19 +90,19 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
 
   describe('모든 툴바 버튼 (13종)', () => {
     const toolbarButtons = [
-      { label: 'Bold', expected: '**bold text**' },
-      { label: 'Italic', expected: '*italic text*' },
-      { label: 'Strikethrough', expected: '~~strikethrough text~~' },
-      { label: 'Heading 1', expected: '# Heading 1' },
-      { label: 'Heading 2', expected: '## Heading 2' },
-      { label: 'Heading 3', expected: '### Heading 3' },
-      { label: 'Insert Link', expected: '[link text](url)' },
-      { label: 'Insert Image', expected: '![alt text](image-url)' },
-      { label: 'Inline Code', expected: '`code`' },
-      { label: 'Code Block', expected: '```\ncode\n```' },
-      { label: 'Bullet List', expected: '- List item' },
-      { label: 'Numbered List', expected: '1. List item' },
-      { label: 'Task List', expected: '- [ ] Task item' },
+      { label: '굵게', expected: '**bold text**' },
+      { label: '기울임', expected: '*italic text*' },
+      { label: '취소선', expected: '~~strikethrough text~~' },
+      { label: '제목 1', expected: '# Heading 1' },
+      { label: '제목 2', expected: '## Heading 2' },
+      { label: '제목 3', expected: '### Heading 3' },
+      { label: '링크 삽입', expected: '[link text](url)' },
+      { label: '이미지 삽입', expected: '![alt text](image-url)' },
+      { label: '인라인 코드', expected: '`code`' },
+      { label: '코드 블록', expected: '```\ncode\n```' },
+      { label: '글머리 기호 목록', expected: '- List item' },
+      { label: '번호 매기기 목록', expected: '1. List item' },
+      { label: '작업 목록', expected: '- [ ] Task item' },
     ]
 
     toolbarButtons.forEach(({ label, expected }) => {
@@ -133,7 +133,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       render(<EditorWithToolbar />)
 
       // Act: Bold 클릭
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert
@@ -148,7 +148,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       render(<EditorWithToolbar />)
 
       // Act: Italic 클릭
-      const italicButton = screen.getByLabelText('Italic')
+      const italicButton = screen.getByLabelText('기울임')
       await user.click(italicButton)
 
       // Assert
@@ -168,7 +168,7 @@ describe('EditorWithToolbar - 커서 위치 삽입 (통합 테스트, DEV-019)',
       // 이 경우 기존 동작 (문서 끝에 추가)으로 폴백
 
       // Act
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: 최소한 에러 없이 동작

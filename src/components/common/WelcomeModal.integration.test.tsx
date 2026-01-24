@@ -220,7 +220,7 @@ describe('WelcomeModal 통합 테스트', () => {
       expect(document.body.style.overflow).toBe('hidden')
 
       // 모달 닫기
-      const closeButton = screen.getByRole('button', { name: /Close/i })
+      const closeButton = screen.getByRole('button', { name: /닫기/i })
       await user.click(closeButton)
 
       await waitFor(() => {

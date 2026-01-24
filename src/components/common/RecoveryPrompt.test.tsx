@@ -83,7 +83,7 @@ describe('RecoveryPrompt', () => {
       />
     )
 
-    const closeButton = screen.getByRole('button', { name: 'Close' })
+    const closeButton = screen.getByRole('button', { name: '닫기' })
     fireEvent.click(closeButton)
 
     expect(onDiscard).toHaveBeenCalledTimes(1)

@@ -1,0 +1,18 @@
+{
+  "title": "Settings",
+  "description": "Change theme, style preset, font size and editor settings.",
+  "theme": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+  "stylePreset": "Style Preset",
+  "stylePresetLabel": "Select style preset",
+  "styleMinimal": "Minimal",
+  "fontSize": "Font Size",
+  "editorSettings": "Editor Settings",
+  "scrollSync": "Scroll Sync",
+  "autoSave": "Auto Save",
+  "language": "Language",
+  "languageKo": "한국어",
+  "languageEn": "English"
+}

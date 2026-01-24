@@ -68,8 +68,8 @@ describe('Layout 컴포넌트', () => {
     fireEvent.resize(window)
 
     render(<Layout />)
-    expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /에디터/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /미리보기/i })).toBeInTheDocument()
   })
 
   it('모바일에서 에디터/프리뷰 탭 전환이 동작해야 함', () => {
@@ -98,7 +98,7 @@ describe('Layout 컴포넌트', () => {
 
     render(<Layout />)
 
-    fireEvent.click(screen.getByRole('button', { name: /Preview/i }))
+    fireEvent.click(screen.getByRole('button', { name: /미리보기/i }))
     expect(setViewMode).toHaveBeenCalledWith('preview')
   })
 
@@ -184,8 +184,8 @@ describe('Layout 컴포넌트', () => {
       render(<Layout />)
 
       // 탭 버튼이 렌더링되어야 함
-      expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /에디터/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /미리보기/i })).toBeInTheDocument()
     })
 
     it('uiStore에 스크롤 위치 함수들이 존재해야 함', () => {
@@ -281,7 +281,7 @@ describe('Layout 컴포넌트', () => {
 
       // Wait for mobile layout to render
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: /에디터/i })).toBeInTheDocument()
       })
 
       // Then - 에디터와 프리뷰가 모두 DOM에 존재해야 함
@@ -318,7 +318,7 @@ describe('Layout 컴포넌트', () => {
       const { container } = render(<Layout />)
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: /에디터/i })).toBeInTheDocument()
       })
 
       // Then - 에디터 컨테이너는 block 클래스를 가져야 함
@@ -355,7 +355,7 @@ describe('Layout 컴포넌트', () => {
       const { container } = render(<Layout />)
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: /미리보기/i })).toBeInTheDocument()
       })
 
       // Then - 프리뷰 컨테이너는 block 클래스를 가져야 함
@@ -392,7 +392,7 @@ describe('Layout 컴포넌트', () => {
       const { container } = render(<Layout />)
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Editor/i })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: /에디터/i })).toBeInTheDocument()
       })
 
       // Then - 에디터를 포함하는 absolute wrapper가 존재해야 함
@@ -425,7 +425,7 @@ describe('Layout 컴포넌트', () => {
       const { container } = render(<Layout />)
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Preview/i })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: /미리보기/i })).toBeInTheDocument()
       })
 
       // Then - overflow-auto를 가진 absolute wrapper가 존재해야 함 (프리뷰 컨테이너)

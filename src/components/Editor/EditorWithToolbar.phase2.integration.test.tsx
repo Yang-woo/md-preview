@@ -27,7 +27,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
 
       // Act: "hello"를 선택하고 Bold 버튼 클릭
       // (실제로는 에디터 내부 선택이 필요하지만, 테스트에서는 editorRef mock)
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: Bold 서식이 적용됨
@@ -45,7 +45,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
 
       // Act: Bold 버튼 클릭 (커서가 "**hello**" 위치에 있다고 가정)
       // 실제로는 getSelection()이 "**hello**"를 반환해야 함
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: 현재는 커서 위치에 따라 결과가 다를 수 있음
@@ -63,7 +63,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       render(<EditorWithToolbar />)
 
       // Act: Bold 클릭
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: Bold 적용
@@ -71,7 +71,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       expect(content).toContain('**')
 
       // Act: Italic 클릭
-      const italicButton = screen.getByLabelText('Italic')
+      const italicButton = screen.getByLabelText('기울임')
       await user.click(italicButton)
 
       // Assert: Italic도 적용
@@ -79,7 +79,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       expect(content).toContain('*')
 
       // Act: Code 클릭
-      const codeButton = screen.getByLabelText('Inline Code')
+      const codeButton = screen.getByLabelText('인라인 코드')
       await user.click(codeButton)
 
       // Assert: Code도 적용
@@ -96,7 +96,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       render(<EditorWithToolbar />)
 
       // Act 1: 제목 추가
-      const h1Button = screen.getByLabelText('Heading 1')
+      const h1Button = screen.getByLabelText('제목 1')
       await user.click(h1Button)
       let content = useEditorStore.getState().content
       expect(content).toContain('# Heading 1')
@@ -105,13 +105,13 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       useEditorStore.getState().setContent(content + '\n\nHello world')
 
       // Act 3: Bold 적용
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
       content = useEditorStore.getState().content
       expect(content).toContain('**bold text**')
 
       // Act 4: 링크 추가
-      const linkButton = screen.getByLabelText('Insert Link')
+      const linkButton = screen.getByLabelText('링크 삽입')
       await user.click(linkButton)
       content = useEditorStore.getState().content
       // Link는 bold 안에 래핑될 수 있음
@@ -132,7 +132,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       render(<EditorWithToolbar />)
 
       // Act: Bold 3번 클릭
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
       await user.click(boldButton)
       await user.click(boldButton)
@@ -155,7 +155,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       await user.tab()
 
       // Assert: 첫 번째 버튼 (Bold)이 포커스됨
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       expect(boldButton).toHaveFocus()
 
       // Act: Enter로 실행
@@ -177,7 +177,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
 
       // Act: Bold 클릭
       const startTime = performance.now()
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
       const endTime = performance.now()
 
@@ -198,7 +198,7 @@ describe('EditorWithToolbar - Phase 2: 선택 영역 서식 & 토글 (통합)', 
       render(<EditorWithToolbar />)
 
       // Act: Bold 클릭 (커서가 0번째 위치)
-      const boldButton = screen.getByLabelText('Bold')
+      const boldButton = screen.getByLabelText('굵게')
       await user.click(boldButton)
 
       // Assert: 시작에 삽입 (Phase 1 기능)

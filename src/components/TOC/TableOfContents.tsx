@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Heading } from '../../hooks/useTOC'
 
 export interface TableOfContentsProps {
@@ -17,6 +18,8 @@ export function TableOfContents({
   activeId,
   className = '',
 }: TableOfContentsProps) {
+  const { t } = useTranslation('toc')
+
   const handleClick = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -38,10 +41,10 @@ export function TableOfContents({
     return (
       <nav
         className={`toc-container ${className}`}
-        aria-label="목차"
+        aria-label={t('ariaLabel')}
       >
         <div className="text-sm text-gray-500 dark:text-gray-400 p-4">
-          목차가 없습니다
+          {t('empty')}
         </div>
       </nav>
     )
@@ -50,11 +53,11 @@ export function TableOfContents({
   return (
     <nav
       className={`toc-container ${className}`}
-      aria-label="목차"
+      aria-label={t('ariaLabel')}
     >
       <div className="toc-header px-4 py-3 border-b border-gray-200 dark:border-gray-700">
         <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-          목차
+          {t('title')}
         </h2>
       </div>
       <ul className="toc-list py-2">
