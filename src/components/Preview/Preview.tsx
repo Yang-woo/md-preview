@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, isValidElement } from 'react'
+import { memo, useEffect, useMemo, isValidElement, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -106,9 +106,12 @@ export const Preview = memo(function Preview({ content, className = '' }: Previe
       pre: ({ node, children, ...props }: any) => {
         const child = Array.isArray(children) ? children[0] : children
 
-        if (isValidElement(child) && child.props?.className?.includes('language-mermaid')) {
-          const diagram = String(child.props.children).replace(/\n$/, '')
-          return <div className="mermaid">{diagram}</div>
+        if (isValidElement(child)) {
+          const childProps = child.props as { className?: string; children?: ReactNode }
+          if (childProps.className?.includes('language-mermaid')) {
+            const diagram = String(childProps.children ?? '').replace(/\n$/, '')
+            return <div className="mermaid">{diagram}</div>
+          }
         }
 
         return <pre {...props}>{children}</pre>
