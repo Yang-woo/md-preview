@@ -55,6 +55,22 @@ const hello = 'world';
     expect(code?.textContent).toContain('const')
   })
 
+  it('Mermaid 코드 블록이 다이어그램 컨테이너로 렌더링되어야 함', () => {
+    const markdown = `
+\`\`\`mermaid
+graph TD
+  A[Start] --> B[End]
+\`\`\`
+`
+
+    const { container } = render(<Preview content={markdown} />)
+    const mermaidContainer = container.querySelector('.mermaid')
+
+    expect(mermaidContainer).toBeInTheDocument()
+    expect(mermaidContainer?.textContent).toContain('graph TD')
+    expect(mermaidContainer?.closest('pre')).toBeNull()
+  })
+
   it('링크가 렌더링되어야 함', () => {
     render(<Preview content="[Link](https://example.com)" />)
     const link = screen.getByRole('link')
